@@ -13,8 +13,14 @@ int num = (int)600000000000000001L
 byte1 + byte2 --> int1 + int2
 int num = byte1 + byte2
 
+---
+
 ## 方法
 #### 格式
 public static void 方法名称() {
     方法体
+}
+比如:
+public static void function1() {
+    System.out.println("hi");
 }
