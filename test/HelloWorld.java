@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Random;
 import com.test.demo.test001;
 import com.test.demo.Test003;
 
@@ -27,7 +28,7 @@ public class HelloWorld {
 //		System.out.println(test2.getName());
 //		System.out.println(test2.getAge());
 
-		test004();
+		test006();
 	}
 
 	// 练习：方法重载
@@ -110,5 +111,45 @@ public class HelloWorld {
 		System.out.println("三个数字的最大值：" + num);
 	}
 
+	/* random 随机数的生成
+	*
+	* 初始化
+	* Random random = new Random();
+	*
+	* 使用
+	* 获取一个随机int，int num = random.nextInt(); 这个时候范围是int的范围，有正负
+	* 获取一个随机int，int num = random.nextInt(3); 这个时候范围是0~2
+	*
+	* */
+	public static void test005() {
+		Random random = new Random();
+
+		int num = random.nextInt();
+		System.out.println("random = " + num);
+
+		for (int i = 0; i < 100; i++) {
+			int n = random.nextInt(10);
+			System.out.print(" " + n);
+		}
+	}
+	// 练习：random猜数字
+	public static void test006() {
+		Random random = new Random();
+		int num = random.nextInt(100) + 1;
+		Scanner scanner = new Scanner(System.in);
+		int inputNum = 0;
+		System.out.println("开始猜数字");
+		while (true) {
+			inputNum = scanner.nextInt();
+			if (inputNum == num) {
+				System.out.println("猜中了");
+				break;
+			} else if (inputNum > num) {
+				System.out.println(inputNum + " 太大了");
+			} else {
+				System.out.println(inputNum + " 太小了");
+			}
+		}
+	}
 }
 
