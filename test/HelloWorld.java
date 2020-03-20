@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
@@ -11,24 +12,7 @@ public class HelloWorld {
 	// main 方法 代表程序执行的起点
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
-//		function1();
-//        int num = function2(1, 2);
-//        System.out.println(num);
-//        System.out.println(sum(1 ,2));
-//        System.out.println(sum(1, 2, 3));
-//        System.out.println(sum(1, 2, 3, 4));
-        // 对象的创建和调用
-//        test001 test = new test001();
-//        test.test();
-//        System.out.println(test.age);
-//        test001();
-
-//		Test003 test = new Test003();
-//		Test003 test2 = new Test003("1", 2);
-//		System.out.println(test2.getName());
-//		System.out.println(test2.getAge());
-
-		test006();
+		test007();
 	}
 
 	// 练习：方法重载
@@ -149,6 +133,53 @@ public class HelloWorld {
 			} else {
 				System.out.println(inputNum + " 太小了");
 			}
+		}
+	}
+
+	/*
+	* ArrayList
+	* 数组的长度不可改变，ArrayList的长度可以随意变化
+	* 对于ArrayList直接打印，打印内容，内容为空则为[]
+	*
+	* 初始化
+	* ArrayList<E> E代表泛型，表示类型；泛型不可以是引用类型
+	* String类型的ArrayList ArrayList<String> list = new ArrayList<>();
+	*
+	* 使用（常用方法）
+	* add 添加，返回值boolean
+	* get(index) 读取
+	* remove(index or object) 移除 如果是object，选择序列号最小的一个object进行删除，返回值是boolean；如果是index，超出就报错，返回一个object；
+	* size() 长度，返回int长度
+	*
+	* */
+	public static void test007() {
+		ArrayList<String> list = new ArrayList<>();
+		list.add("1");
+		list.add("2");
+		list.add("1");
+		list.add("2");
+		System.out.println(list.add("2"));
+		list.add("1");
+		System.out.println(list);
+		String gStr = list.get(0);
+		System.out.println(gStr);
+		boolean rStr = list.remove("3");
+		System.out.println("remove " + rStr);
+		rStr = list.remove("2");
+		System.out.println("remove " + rStr);
+		String rS = list.remove(0);
+		System.out.println("remove " + rS);
+		System.out.println(list);
+		int size = list.size();
+		System.out.println("size = " + size);
+	}
+	
+	// 练习：生成6个1-33之间的随机整数，添加到集合，并遍历集合
+	public static void test008() {
+		Random random = new Random();
+		ArrayList<Integer> list = new ArrayList<>();
+		for (int i = 0; i < ; i++) {
+			
 		}
 	}
 }
