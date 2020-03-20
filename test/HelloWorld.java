@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Scanner;
 import com.test.demo.test001;
 import com.test.demo.Test003;
 
@@ -25,6 +26,8 @@ public class HelloWorld {
 //		Test003 test2 = new Test003("1", 2);
 //		System.out.println(test2.getName());
 //		System.out.println(test2.getAge());
+
+		test004();
 	}
 
 	// 练习：方法重载
@@ -64,6 +67,48 @@ public class HelloWorld {
 
     }
 
+	/*
+	* 练习：Scanner键盘输入
+	*
+	* 创建时候
+	* 初始化System.in表示从键盘输入
+	*
+	* 使用
+	* 获取键盘输入的int数字，int num = scanner.nextInt();
+	* 获取键盘输入的String字符串，String str = scanner.next();
+	*/
+	public static void test002() {
+		Scanner scanner = new Scanner(System.in);
+		int num = scanner.nextInt();
+		System.out.println("输入的数字是：" + num);
+		String str = scanner.next();
+		System.out.println("输入的字符串是：" + str);
+	}
+
+	// 练习：Scanner输入两个int数字，输出相加值
+	public static void test003() {
+		Scanner scanner = new Scanner(System.in);
+		int num1 = scanner.nextInt();
+		int num2 = scanner.nextInt();
+		System.out.println(num1 + num2);
+	}
+
+	// 练习：Scanner输入三个int数字，输出最大值
+	public static void test004() {
+		Scanner scanner = new Scanner(System.in);
+		int num;
+		int num1 = scanner.nextInt();
+		num = num1;
+		int num2 = scanner.nextInt();
+		if (num2 > num) {
+			num = num2;
+		}
+		int num3 = scanner.nextInt();
+		if (num3 > num) {
+			num = num3;
+		}
+		System.out.println("三个数字的最大值：" + num);
+	}
 
 }
 
