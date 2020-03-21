@@ -12,7 +12,7 @@ public class HelloWorld {
 	// main 方法 代表程序执行的起点
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
-		test007();
+		test008();
 	}
 
 	// 练习：方法重载
@@ -178,9 +178,13 @@ public class HelloWorld {
 	public static void test008() {
 		Random random = new Random();
 		ArrayList<Integer> list = new ArrayList<>();
-		for (int i = 0; i < ; i++) {
-			
+		for (int i = 0; i < 6; i++) {
+			int num = random.nextInt(33) + 1;
+			list.add(num);
 		}
+        for (Integer integer : list) {
+            System.out.println(integer);
+        }
 	}
 }
 
