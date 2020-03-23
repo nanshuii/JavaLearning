@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.Random;
 import com.test.demo.test001;
 import com.test.demo.Test003;
+import com.test.demo.Test004;
 
 import javax.xml.namespace.QName;
 
@@ -12,7 +13,7 @@ public class HelloWorld {
 	// main 方法 代表程序执行的起点
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
-		test008();
+		test010();
 	}
 
 	// 练习：方法重载
@@ -186,5 +187,43 @@ public class HelloWorld {
             System.out.println(integer);
         }
 	}
+
+	// 练习：键盘输入一个字符串，并且统计其中各种字符出现的次数，种类有大写字母，小写字母，数字，其他
+    public static void test009() {
+	    Scanner scanner = new Scanner(System.in);
+	    System.out.println("请输入一串字符串：");
+	    String str = scanner.next();
+	    System.out.println("start........");
+	    int upper = 0;
+	    int lower = 0;
+	    int number = 0;
+	    int other = 0;
+	    char[] chars = str.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            char ch = chars[i];
+            if ('A' <= ch && 'Z' >= ch) {
+                upper++;
+            } else if ('a' <= ch && 'z' >= ch) {
+                lower++;
+            } else if ('0' <= ch && '9' >= ch) {
+                number++;
+            } else {
+                other++;
+            }
+        }
+        System.out.println("upper = " + upper + " lower = " + lower + " number = " + number + " other = " + other);
+    }
+
+    // 练习：static关键字
+    public static void test010() {
+	    Test004 test1 = new Test004("roll", 12);
+	    Test004 test2 = new Test004("gill", 14);
+	    test1.room = "101";
+	    System.out.println("test1 name = " + test1.getName() + " age = " + test1.getAge() + " room = " + test1.room + " id = " + test1.getId());
+        System.out.println("test2 name = " + test2.getName() + " age = " + test2.getAge() + " room = " + test2.room + " id = " + test2.getId());
+
+        test1.method();
+        Test004.staticMethod();
+    }
 }
 
