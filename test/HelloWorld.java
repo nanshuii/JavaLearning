@@ -13,7 +13,7 @@ public class HelloWorld {
 	// main 方法 代表程序执行的起点
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
-		test010();
+		test011();
 	}
 
 	// 练习：方法重载
@@ -224,6 +224,22 @@ public class HelloWorld {
 
         test1.method();
         Test004.staticMethod();
+    }
+
+    /*
+    * Math
+    * public static double abs(double num); 获取绝对值
+    * public static double ceil(double num); 向上取整 1.1-->2.0
+    * public static double floor(double num); 向下取整 1.9-->1.0
+    * public static long round(double num); 四舍五入
+    * Math.PI
+    *
+    * */
+    public static void test011() {
+        System.out.println(Math.abs(-111));
+        System.out.println(Math.ceil(1.1));
+        System.out.println(Math.floor(1.9));
+        System.out.println(Math.round(1.99));
     }
 }
 
