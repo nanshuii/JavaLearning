@@ -2,9 +2,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
-import com.test.demo.test001;
-import com.test.demo.Test003;
-import com.test.demo.Test004;
+
+import com.test.demo.*;
 
 import javax.xml.namespace.QName;
 
@@ -13,7 +12,7 @@ public class HelloWorld {
 	// main 方法 代表程序执行的起点
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
-		test011();
+		test013();
 	}
 
 	// 练习：方法重载
@@ -24,7 +23,6 @@ public class HelloWorld {
 	public static int function2(int num1, int num2) {
 	    return num1 + num2;
     }
-
     public static int sum(int a, int b) {
 		return a + b;
 	}
@@ -32,6 +30,7 @@ public class HelloWorld {
 	public static int sum(int a, int b, int c) {
 		return a + b + c;
 	}
+
 
 	public static int sum(int a, int b, int c, int d) {
 		return a + b + c + d;
@@ -241,5 +240,34 @@ public class HelloWorld {
         System.out.println(Math.floor(1.9));
         System.out.println(Math.round(1.99));
     }
+
+    // 练习：继承
+	public static void test012() {
+		Test005 test = new Test005();
+		test.method();
+		System.out.println(test.numF);
+
+    	Test006 test1 = new Test006();
+    	test1.method();
+    	System.out.println(test1.numF + test1.numZ);
+
+    	System.out.println("=============================");
+
+    	System.out.println(test1.num); // 访问子类的num
+    	System.out.println(test1.numF); // 访问父类的numF
+
+		System.out.println("=============================");
+
+		test1.methodZ();
+		test1.methodF();
+		test1.method();
+
+	}
+
+	// 练习：抽象
+	public static void test013() {
+    	Test008 test = new Test008();
+    	test.method();
+	}
 }
 
