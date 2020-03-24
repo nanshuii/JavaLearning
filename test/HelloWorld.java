@@ -12,7 +12,7 @@ public class HelloWorld {
 	// main 方法 代表程序执行的起点
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
-		test013();
+		test014();
 	}
 
 	// 练习：方法重载
@@ -268,6 +268,21 @@ public class HelloWorld {
 	public static void test013() {
     	Test008 test = new Test008();
     	test.method();
+	}
+
+	// 练习：接口
+	public static void test014() {
+    	Test010 test = new Test010();
+    	test.absMethod();
+    	test.absMethod2();
+    	test.defaultMethod();
+
+    	Test009.staticMethod();
+
+    	System.out.println(test.NUM);
+
+    	test.method();
+
 	}
 }
 
