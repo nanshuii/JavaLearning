@@ -8,6 +8,7 @@
 #### 内部类
 #### 和日期相关的类
 #### System类
+#### StringBuilder类
 
 ------
 ## Scanner键盘输入
@@ -265,6 +266,20 @@ System.out.println("复制前：" + Arrays.toString(dest)); // [6, 7, 8, 9, 10]
 System.arraycopy(src, 0 , dest, 0, 3);
 System.out.println("复制后：" + Arrays.toString(dest)); [1, 2, 3, 9, 10]
 ```
+----
+## StringBuilder类
+字符串是常量，在创建之后不可改变；进行字符串的相加，内存中会产生多个字符串，效率低下
+StringBuilder是字符串缓冲区，是一个可以变化的字符串，实际上是一个数组，初始长度为16
+byte[] value = new byte[16];
+
+#### 初始化
+StringBuilder sb1 = new StringBuilder();
+StringBuilder sb2 = new StringBuilder("11231232131231231231231231");
+
+#### 常用方法
+append(任意类型) 返回StringBuilder
+
+toString() 转换成String
 
 
 
