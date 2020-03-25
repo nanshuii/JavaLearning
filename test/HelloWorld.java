@@ -349,7 +349,28 @@ public class HelloWorld {
 	* System.out.println(date4); // Wed Mar 25 16:47:51 CST 2020
 	*
 	* Calendar
+	* 初始化 Calendar calendar = Calendar.getInstance();
 	*
+	* 常用方法
+	* 获取其中的一个参数值 get 返回 int
+	* 可以获取年月日时分秒
+	* System.out.println("year = " + calendar.get(Calendar.YEAR));
+	* System.out.println("month = " + calendar.get(Calendar.MONDAY)); // 月份0-11
+	* System.out.println("dayOfMonth = " + calendar.get(Calendar.DAY_OF_MONTH)); // 一个月中的某一天
+	* System.out.println("date = " + calendar.get(Calendar.DATE)); // 等同于DAY_OF_MONTH
+	* System.out.println("hour = " + calendar.get(Calendar.HOUR));
+	* System.out.println("minute = " + calendar.get(Calendar.MINUTE));
+	* System.out.println("second = " + calendar.get(Calendar.SECOND));
+	*
+	* 设置一个值给制定的字段 年月日时分秒
+	* calendar.set(Calendar.YEAR, 2088);
+	*
+	* 设置一个值给制定的指端，用来增加和减少 年月日时分秒
+	* 可以是增加或是减少
+	* calendar.add(Calendar.YEAR, -100);
+	*
+	* 把日历对象转换成日期对象
+	* Date date5 = calendar.getTime();
 	*
 	* */
 	public static void test017() throws ParseException {
@@ -373,6 +394,29 @@ public class HelloWorld {
 		System.out.println(formatStr); // 2020-03-25 16-47-51
 		Date date4 = format.parse(formatStr);
 		System.out.println(date4); // Wed Mar 25 16:47:51 CST 2020
+
+		System.out.println("==========================");
+
+		Calendar calendar = Calendar.getInstance();
+		System.out.println(calendar);
+
+		System.out.println("year = " + calendar.get(Calendar.YEAR));
+		System.out.println("month = " + calendar.get(Calendar.MONDAY)); // 月份0-11
+		System.out.println("dayOfMonth = " + calendar.get(Calendar.DAY_OF_MONTH));
+		System.out.println("date = " + calendar.get(Calendar.DATE));
+		System.out.println("hour = " + calendar.get(Calendar.HOUR));
+		System.out.println("minute = " + calendar.get(Calendar.MINUTE));
+		System.out.println("second = " + calendar.get(Calendar.SECOND));
+
+		calendar.set(Calendar.YEAR, 2088);
+		System.out.println("year = " + calendar.get(Calendar.YEAR));
+
+		calendar.add(Calendar.YEAR, -100);
+		System.out.println("year = " + calendar.get(Calendar.YEAR));
+
+		Date date5 = calendar.getTime();
+		System.out.println(date5);
+
 	}
 
 }

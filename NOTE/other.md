@@ -6,6 +6,7 @@
 #### Math
 #### final
 #### 内部类
+#### 和日期相关的类
 
 ------
 ## Scanner键盘输入
@@ -169,7 +170,7 @@ Test012.Test0121 test1 = new Test012().new Test0121();
 #### 匿名类
 只需要使用一次，免除接口实现类 接口 接口名称 = new 接口() { 里面覆盖重写接口的抽象方法 }
 
-```aidl
+```
 Test011 test = new Test011() {
     @Override
     public void method() {
@@ -199,7 +200,57 @@ Test011 test = new Test011() {
     }.method();
 }
 ```
+----
+## 和日期相关的类
+#### Date
+Date精确到毫秒
 
+##### 初始化
+Date date = new Date(0L); Thu Jan 01 08:00:00 CST 1970
+Date date = new Date(); 当前时间 Wed Mar 25 16:04:38 CST 2020
+Date date2 = new Date(1585123477934L); 根据时间戳来转换时间 Wed Mar 25 16:04:37 CST 2020
+
+##### 常用方法
+###### getTime(); 
+返回时间戳 long timestamp = date1.getTime();
+
+#### DateFormat
+##### 初始化
+yyyy-MM-dd HH-mm-ss 年月日时分秒
+SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+
+##### 格式化 日期转为文本
+String formatStr = format.format(date1);
+System.out.println(formatStr); // 2020-03-25 16-47-51
+
+##### 解析 文本转为日期
+Date date4 = format.parse(formatStr);
+System.out.println(date4); // Wed Mar 25 16:47:51 CST 2020
+
+#### Calendar
+##### 初始化 
+Calendar calendar = Calendar.getInstance();
+
+##### 常用方法
+获取其中的一个参数值 get 返回 int
+可以获取年月日时分秒
+System.out.println("year = " + calendar.get(Calendar.YEAR));
+System.out.println("month = " + calendar.get(Calendar.MONDAY)); // 月份0-11
+System.out.println("dayOfMonth = " + calendar.get(Calendar.DAY_OF_MONTH)); // 一个月中的某一天
+System.out.println("date = " + calendar.get(Calendar.DATE)); // 等同于DAY_OF_MONTH
+System.out.println("hour = " + calendar.get(Calendar.HOUR));
+System.out.println("minute = " + calendar.get(Calendar.MINUTE));
+System.out.println("second = " + calendar.get(Calendar.SECOND));
+
+设置一个值给制定的字段 年月日时分秒
+calendar.set(Calendar.YEAR, 2088);
+
+设置一个值给制定的指端，用来增加和减少 年月日时分秒
+可以是增加或是减少
+calendar.add(Calendar.YEAR, -100);
+
+把日历对象转换成日期对象
+Date date5 = calendar.getTime();
 
 
 
