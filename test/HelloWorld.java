@@ -12,7 +12,7 @@ public class HelloWorld {
 	// main 方法 代表程序执行的起点
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
-		test014();
+		test016();
 	}
 
 	// 练习：方法重载
@@ -284,5 +284,47 @@ public class HelloWorld {
     	test.method();
 
 	}
+
+	// 练习：内部类
+	public static void test015() {
+    	Test012.Test0121 test1 = new Test012().new Test0121();
+    	test1.methodInsert();
+    	System.out.println("======================");
+    	Test012 test = new Test012();
+    	test.methodInsertUsed();
+		System.out.println("======================");
+	}
+
+	// 练习：匿名内部类
+	public static void test016() {
+    	Test011 test = new Test011() {
+			@Override
+			public void method() {
+				System.out.println("匿名内部类实现方法 method");
+			}
+
+			@Override
+			public void absMethod() {
+				System.out.println("匿名内部类实现方法 abstract method");
+			}
+		};
+
+    	test.method();
+    	test.absMethod();
+    	test.defaultMethod();
+
+    	new Test011() {
+			@Override
+			public void method() {
+				System.out.println("匿名对象 method");
+			}
+
+			@Override
+			public void absMethod() {
+
+			}
+		}.method();
+	}
+
 }
 

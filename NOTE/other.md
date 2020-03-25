@@ -4,6 +4,8 @@
 #### ArrayList
 #### static
 #### Math
+#### final
+#### 内部类
 
 ------
 ## Scanner键盘输入
@@ -120,3 +122,89 @@ public static double ceil(double num); 向上取整 1.1-->2.0
 public static double floor(double num); 向下取整 1.9-->1.0
 public static long round(double num); 四舍五入
 Math.PI 
+----
+## final
+对于类和方法，final和abstract不可以同时使用
+
+#### final修饰一个类
+public final class 类名称{ //...... }
+这个类不可以有子类
+
+#### final修饰一个方法
+final 返回值类型(){ //...... }
+这个方法不能被覆盖重写
+
+#### final修饰一个局部变量
+final 类型 名称
+局部变量不能进行更改
+对于引用类型来说，地址值不可改变；里面的内容可以改变
+
+#### final修饰一个成员变量
+final 类型 名称
+成员变量不能进行改变
+用了final之后必须进行赋值，直接赋值或是用构造方法赋值（用了直接赋值之后不可以使用构造赋值）
+-----
+## 内部类
+成员内部类
+局部内部类（包含匿名内部类）
+内部类可以访问内部的变量和方法
+外部访问内部类需要实例化内部类对象
+
+#### 使用方式
+间接使用
+在外部类的方法中，实例化内部类对象，调用内部类方法
+
+直接使用
+外部类.内部类 名称 = new 外部类().new 内部类()
+Test012.Test0121 test1 = new Test012().new Test0121();
+
+#### 当内部类成员变量和外部类成员变量名字相同时候
+内部类方法内部变量 num
+内部类成员变量 this.num
+外部类成员变量 外部类的名字.this.num
+
+#### 局部内部类想要访问所在方法的局部变量
+需要final标识（如果不变，可以省略）
+
+#### 匿名类
+只需要使用一次，免除接口实现类 接口 接口名称 = new 接口() { 里面覆盖重写接口的抽象方法 }
+
+```aidl
+Test011 test = new Test011() {
+    @Override
+    public void method() {
+        System.out.println("匿名内部类实现方法 method");
+    }
+    
+    @Override
+    public void absMethod() {
+        System.out.println("匿名内部类实现方法 abstract method");
+    }
+    };
+    
+    test.method();
+    test.absMethod();
+    test.defaultMethod();
+    
+    new Test011() {
+    @Override
+    public void method() {
+        System.out.println("匿名对象 method");
+    }
+    
+    @Override
+    public void absMethod() {
+    
+    }
+    }.method();
+}
+```
+
+
+
+
+
+
+
+
+
