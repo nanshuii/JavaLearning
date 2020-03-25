@@ -1,7 +1,6 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Random;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import com.test.demo.*;
 
@@ -10,28 +9,24 @@ import javax.xml.namespace.QName;
 // 定义一个类的名称 HelloWorld
 public class HelloWorld {
 	// main 方法 代表程序执行的起点
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		System.out.println("Hello World!");
-		test016();
+		test017();
 	}
 
 	// 练习：方法重载
 	public static void function1() {
 		System.out.println("hi");
 	}
-
 	public static int function2(int num1, int num2) {
 	    return num1 + num2;
     }
     public static int sum(int a, int b) {
 		return a + b;
 	}
-
 	public static int sum(int a, int b, int c) {
 		return a + b + c;
 	}
-
-
 	public static int sum(int a, int b, int c, int d) {
 		return a + b + c + d;
 	}
@@ -324,6 +319,60 @@ public class HelloWorld {
 
 			}
 		}.method();
+	}
+
+
+	/*
+	* Date
+	* Date精确到毫秒
+	*
+	* 初始化
+	* Date date = new Date(0L); Thu Jan 01 08:00:00 CST 1970
+	* Date date = new Date(); 当前时间 Wed Mar 25 16:04:38 CST 2020
+	* Date date2 = new Date(1585123477934L); 根据时间戳来转换时间 Wed Mar 25 16:04:37 CST 2020
+	*
+	* 常用方法
+	* getTime(); 返回时间戳 long timestamp = date1.getTime();
+	*
+	*
+	* DateFormat
+	* 
+	* 初始化
+	* yyyy-MM-dd HH-mm-ss 年月日时分秒
+	* SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+	*
+	* 格式化 日期转为文本
+	* String formatStr = format.format(date1);
+	* System.out.println(formatStr); // 2020-03-25 16-47-51
+	* 解析 文本转为日期
+	* Date date4 = format.parse(formatStr);
+	* System.out.println(date4); // Wed Mar 25 16:47:51 CST 2020
+	*
+	* Calendar
+	*
+	*
+	* */
+	public static void test017() throws ParseException {
+
+		Date date = new Date(0L);
+		System.out.println(date);
+
+		Date date1 = new Date();
+		System.out.println(date1);
+
+		Date date2 = new Date(1585123477934L);
+		System.out.println(date2);
+
+		long timestamp = date1.getTime();
+		System.out.println(timestamp);
+
+		System.out.println("==========================");
+
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+		String formatStr = format.format(date1);
+		System.out.println(formatStr); // 2020-03-25 16-47-51
+		Date date4 = format.parse(formatStr);
+		System.out.println(date4); // Wed Mar 25 16:47:51 CST 2020
 	}
 
 }
