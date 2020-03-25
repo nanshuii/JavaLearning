@@ -11,7 +11,7 @@ public class HelloWorld {
 	// main 方法 代表程序执行的起点
 	public static void main(String[] args) throws ParseException {
 		System.out.println("Hello World!");
-		test017();
+		test018();
 	}
 
 	// 练习：方法重载
@@ -419,5 +419,24 @@ public class HelloWorld {
 
 	}
 
+	/*
+	* System类
+	*
+	* System.currentTimeMillis();
+	* 返回以毫秒值为单位的当前时间，可以用来获取一个操作使用的时间
+	*
+	* System.arrayCopy(src 要复制的原数组，secpos 原数组的起始索引位置， dest 目标数组，destpos 目标数组的起始索引位置， length 要复制的数组元素的数量);
+	*
+	* */
+	public static void test018() {
+		System.out.println(System.currentTimeMillis()); // 返回以毫秒值为单位的当前时间，可以用来获取一个操作使用的时间
+
+		int[] src = {1, 2, 3, 4, 5};
+		int[] dest = {6, 7, 8, 9 , 10};
+		System.out.println("复制前：" + Arrays.toString(dest)); // [6, 7, 8, 9, 10]
+		System.arraycopy(src, 0 , dest, 0, 3);
+		System.out.println("复制后：" + Arrays.toString(dest)); [1, 2, 3, 9, 10]
+
+	}
 }
 

@@ -7,6 +7,7 @@
 #### final
 #### 内部类
 #### 和日期相关的类
+#### System类
 
 ------
 ## Scanner键盘输入
@@ -251,6 +252,19 @@ calendar.add(Calendar.YEAR, -100);
 
 把日历对象转换成日期对象
 Date date5 = calendar.getTime();
+-----
+## System类
+#### System.currentTimeMillis();
+返回以毫秒值为单位的当前时间，可以用来获取一个操作使用的时间
+
+#### System.arrayCopy(src 要复制的原数组，secpos 原数组的起始索引位置， dest 目标数组，destpos 目标数组的起始索引位置， length 要复制的数组元素的数量);
+```
+int[] src = {1, 2, 3, 4, 5};
+int[] dest = {6, 7, 8, 9 , 10};
+System.out.println("复制前：" + Arrays.toString(dest)); // [6, 7, 8, 9, 10]
+System.arraycopy(src, 0 , dest, 0, 3);
+System.out.println("复制后：" + Arrays.toString(dest)); [1, 2, 3, 9, 10]
+```
 
 
 
