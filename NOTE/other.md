@@ -279,7 +279,6 @@ StringBuilder sb2 = new StringBuilder("11231232131231231231231231");
 
 #### 常用方法
 append(任意类型) 返回StringBuilder
-
 toString() 转换成String
 -----
 ## Iterator 迭代器

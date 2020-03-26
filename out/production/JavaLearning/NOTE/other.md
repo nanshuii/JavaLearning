@@ -9,6 +9,7 @@
 #### 和日期相关的类
 #### System类
 #### StringBuilder类
+#### Iterator 迭代器
 
 ------
 ## Scanner键盘输入
@@ -278,12 +279,37 @@ StringBuilder sb2 = new StringBuilder("11231232131231231231231231");
 
 #### 常用方法
 append(任意类型) 返回StringBuilder
-
 toString() 转换成String
+-----
+## Iterator 迭代器
+Collection集合元素的通用获取方式，获取元素时候判断集合中是否还有元素
 
+#### 初始化
+迭代器的泛型和集合泛型相同
+Iterator<String> iterator = collection.iterator();
 
+#### 常用方法
+hasNext()
+返回true，则有下一个元素
 
+next()
+返回迭代器的下一个元素
 
+```$xslt
+Collection<String> collection = new ArrayList<String>();
+collection.add("1");
+collection.add("2");
+collection.add("3");
+collection.add("4");
+System.out.println(collection);
+
+Iterator<String> iterator = collection.iterator();
+while (iterator.hasNext()) {
+    String str = iterator.next();
+    System.out.println(str);
+}
+```
+------
 
 
 

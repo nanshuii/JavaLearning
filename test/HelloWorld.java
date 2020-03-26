@@ -11,7 +11,7 @@ public class HelloWorld {
 	// main 方法 代表程序执行的起点
 	public static void main(String[] args) throws ParseException {
 		System.out.println("Hello World!");
-		test020();
+		test021();
 	}
 
 	// 练习：方法重载
@@ -497,6 +497,24 @@ public class HelloWorld {
 			System.out.println(str);
 		}
 
+	}
+
+	/*泛型*/
+	public static void test021() {
+		Test013 test = new Test013();
+		test.setName("name");
+		System.out.println(test.getName());
+		System.out.println("======================");
+
+		Test014 test0 = new Test014();
+		test0.setName("string name");
+		System.out.println(test0.getName());
+		test0.setName(2);
+		System.out.println(test0.getName());
+
+		Test014<Integer> test1 = new Test014<>();
+		test1.setName(1);
+		System.out.println(test1.getName());
 	}
 }
 
