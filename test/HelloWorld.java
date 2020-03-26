@@ -11,7 +11,7 @@ public class HelloWorld {
 	// main 方法 代表程序执行的起点
 	public static void main(String[] args) throws ParseException {
 		System.out.println("Hello World!");
-		test019();
+		test020();
 	}
 
 	// 练习：方法重载
@@ -469,6 +469,33 @@ public class HelloWorld {
 
 		String s = sb1.toString();
 		System.out.println(s);
+
+	}
+
+	/*
+	* Iterator 迭代器
+	* Collection集合元素的通用获取方式，获取元素时候判断集合中是否还有元素
+	*
+	* hasNext()
+	* 返回true，则有下一个元素
+	*
+	* next()
+	* 返回迭代器的下一个元素
+	*
+	* */
+	public static void test020() {
+		Collection<String> collection = new ArrayList<String>();
+		collection.add("1");
+		collection.add("2");
+		collection.add("3");
+		collection.add("4");
+		System.out.println(collection);
+
+		Iterator<String> iterator = collection.iterator();
+		while (iterator.hasNext()) {
+			String str = iterator.next();
+			System.out.println(str);
+		}
 
 	}
 }
