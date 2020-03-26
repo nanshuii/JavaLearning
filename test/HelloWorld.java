@@ -574,5 +574,12 @@ public class HelloWorld {
 		System.out.println(player3);
 		System.out.println(cardsRemind);
 	}
+
+	public static void test023() {
+		List<String> list = new ArrayList<String>();
+
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("1");
+	}
 }
 
