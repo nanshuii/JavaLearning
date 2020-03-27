@@ -11,8 +11,9 @@ public class HelloWorld {
 	// main 方法 代表程序执行的起点
 	public static void main(String[] args) throws ParseException {
 		System.out.println("Hello World!");
-		test024(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-		test025("hello", 1.11, 1, 2, 3);
+//		test024(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+//		test025("hello", 1.11, 1, 2, 3);
+		test026();
 	}
 
 	// 练习：方法重载
@@ -602,6 +603,100 @@ public class HelloWorld {
 		System.out.println(a);
 		System.out.println(b);
 		System.out.println(Arrays.toString(arr));
+	}
+
+	/*
+	* Map
+	* HashMap 无序
+	* LinkedHashMap 有序
+	*
+	* put
+	* 当key不存在的时候，新建key-value；返回null
+	* 当key存在的时候，替换value；返回被替换的value
+	*
+	* remove
+	* 当key不存在的时候，返回null
+	* 当key存在的时候，返回被移除的value
+	*
+	* get
+	* 当key不存在的时候，返回null
+	* 当key存在的时候，返回value
+	*
+	* containsKey
+	* 返回boolean
+	*
+	* keySet
+	* 返回一个set<T>
+	*
+	* Entry<key, value> 键值对对象
+	* entrySet 获取set entry
+	* Set<Map.Entry<String, String>> set1 = map.entrySet();
+	*
+	* */
+	public static void test026() {
+		Map<String, String> map = new HashMap<>();
+		String st1 = map.put("1", "111");
+		System.out.println(map + st1);
+		String st2 = map.put("1", "1 change");
+		System.out.println(map + st2);
+
+		System.out.println("==============");
+
+		map.put("2", "remove");
+		System.out.println(map);
+		String str3 = map.remove("3");
+		System.out.println(map + str3);
+		String str4 = map.remove("2");
+		System.out.println(map + str4);
+
+		System.out.println("==========");
+
+		String str5 = map.get("2");
+		System.out.println(str5);
+		String str6 = map.get("1");
+		System.out.println(str6);
+
+		System.out.println("========");
+
+		Boolean bool1 = map.containsKey("3");
+		System.out.println(bool1);
+		Boolean bool2 = map.containsKey("1");
+		System.out.println(bool2);
+
+		System.out.println("===========");
+
+		map.put("2", "22222");
+		map.put("3", "3333333");
+		map.put("4", "444444");
+		Set<String> set = map.keySet();
+		for (String s : set) {
+			System.out.println(map.get(s));
+		}
+
+		System.out.println("========");
+
+		Set<Map.Entry<String, String>> set1 = map.entrySet();
+		Iterator<Map.Entry<String, String>> iterator = set1.iterator();
+		while (iterator.hasNext()) {
+			Map.Entry<String, String> entry = iterator.next();
+			String key = entry.getKey();
+			String value = entry.getValue();
+			System.out.println(key + value);
+		}
+		for (Map.Entry<String, String> entry : set1) {
+			String key = entry.getKey();
+			String value = entry.getValue();
+			System.out.println(key + value);
+		}
+
+		System.out.println("=============");
+
+		
+
+
+
+
+
 	}
 }
 
