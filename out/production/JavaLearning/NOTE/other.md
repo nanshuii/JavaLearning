@@ -78,8 +78,12 @@ ArrayList<E> E代表泛型，表示类型；泛型不可以是引用类型
 String类型的ArrayList ArrayList<String> list = new ArrayList<>();
 #### 使用（常用方法）
 add 添加，返回值boolean
+add可以指定替换某个index的值
+
 get(index) 读取
+
 remove(index or object) 移除 如果是object，选择序列号最小的一个object进行删除，返回值是boolean；如果是index，超出就报错，返回一个object；
+
 size() 长度，返回int长度
 #### 示例
 ```
@@ -310,6 +314,10 @@ while (iterator.hasNext()) {
 }
 ```
 ------
+----
+
+
+
 
 
 

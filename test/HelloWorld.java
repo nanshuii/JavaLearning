@@ -11,7 +11,8 @@ public class HelloWorld {
 	// main 方法 代表程序执行的起点
 	public static void main(String[] args) throws ParseException {
 		System.out.println("Hello World!");
-		test022();
+		test024(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+		test025("hello", 1.11, 1, 2, 3);
 	}
 
 	// 练习：方法重载
@@ -580,6 +581,27 @@ public class HelloWorld {
 
 		ArrayList<String> arrayList = new ArrayList<String>();
 		arrayList.add("1");
+	}
+
+	/*
+	* 可变参数
+	* 当数据类型一致的时候，相当于传递了一个数组
+	* 可变参数必须放在参数列表最后面
+	*
+	* */
+	public static void test024(int ...arr) {
+		System.out.println(Arrays.toString(arr));
+		int num = 0;
+		for (int i : arr) {
+			num += i;
+		}
+		System.out.println(num);
+	}
+
+	public static void test025(String a, Double b, int ...arr) {
+		System.out.println(a);
+		System.out.println(b);
+		System.out.println(Arrays.toString(arr));
 	}
 }
 
