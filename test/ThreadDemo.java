@@ -1,6 +1,8 @@
 package test;
 
 import java.sql.SQLOutput;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /*
 * 线程
@@ -34,7 +36,15 @@ import java.sql.SQLOutput;
 * 多个线程使用的锁对象是同一个锁对象
 * 同步中的线程没有执行完毕不会释放锁对象，同步外的线程没有锁对象进不去同步
 * 频繁判断锁，创建锁，释放锁，程序效率降低
-* 2.
+* 2. 同步方法
+* public synchronized void 方法名() { ... }
+* 同步方法锁住方法内部，只要一个线程执行；
+* 3.lock锁
+* 初始化
+* Lock lock = new ReentrantLock();
+* 加锁 lock.lock();
+* 解锁 lock.unlock();
+*
 *
 * */
 public class ThreadDemo {
@@ -48,7 +58,11 @@ public class ThreadDemo {
 
 //        threadTest04();
 
-        threadTest05();
+//        threadTest05();
+
+//        threadTest06();
+
+        threadTest07();
     }
 
     // 多线程的实现一
@@ -160,7 +174,7 @@ public class ThreadDemo {
     }
 
     // 参照threadTest04()解决线程安全问题
-    // 同步代码块
+    // 1.同步代码块
     public static void threadTest05() {
         class Thread1 implements Runnable {
 
@@ -198,7 +212,7 @@ public class ThreadDemo {
     }
 
     // 参照threadTest04()解决线程安全问题
-    //
+    // 2.同步方法
     public static void threadTest06() {
         class Thread1 implements Runnable {
 
@@ -207,6 +221,52 @@ public class ThreadDemo {
             @Override
             public void run() {
                 while (true) {
+                    boolean b = threadTest06Method();
+                    if (b) {
+                        break;
+                    }
+                }
+            }
+
+            public synchronized Boolean threadTest06Method() {
+                if (num > 0) {
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(Thread.currentThread().getName() + "===" + num);
+                    num--;
+                } else {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        Thread1 thread1 = new Thread1();
+        Thread t1 = new Thread(thread1);
+        Thread t2 = new Thread(thread1);
+        Thread t3 = new Thread(thread1);
+        t1.start();
+        t2.start();
+        t3.start();
+
+    }
+
+    // 参照threadTest04()解决线程安全问题
+    // 3.lock
+    public static void threadTest07() {
+        class Thread1 implements Runnable {
+
+            private int num = 20;
+
+            Lock lock = new ReentrantLock();
+
+            @Override
+            public void run() {
+                while (true) {
+                    lock.lock();
                     if (num > 0) {
                         try {
                             Thread.sleep(10);
@@ -218,6 +278,7 @@ public class ThreadDemo {
                     } else {
                         break;
                     }
+                    lock.unlock();
                 }
             }
         }
@@ -231,5 +292,7 @@ public class ThreadDemo {
         t3.start();
 
     }
+
+
 }
 
