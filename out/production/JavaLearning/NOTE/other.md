@@ -10,6 +10,7 @@
 #### System类
 #### StringBuilder类
 #### Iterator 迭代器
+#### Map
 
 ------
 ## Scanner键盘输入
@@ -339,7 +340,36 @@ public static void test025(String a, Double b, int ...arr) {
     System.out.println(Arrays.toString(arr));
     }
 ```
+-----
+## Map
+HashMap 无序 key-value可以是null
+LinkedHashMap 有序
 
+#### 初始化
+Map<String, String> map = new HashMap<>();
+
+#### 常用方法
+##### put
+当key不存在的时候，新建key-value；返回null
+当key存在的时候，替换value；返回被替换的value
+
+##### remove
+当key不存在的时候，返回null
+当key存在的时候，返回被移除的value
+
+##### get
+当key不存在的时候，返回null
+当key存在的时候，返回value
+
+##### containsKey
+返回boolean
+
+##### keySet
+返回一个set<T> set key
+
+#### Entry<key, value> 键值对对象
+entrySet 获取set entry
+Set<Map.Entry<String, String>> set = map.entrySet();
 
 
 

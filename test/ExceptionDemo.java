@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 /*
@@ -39,7 +40,7 @@ import java.util.Date;
 *
 * */
 public class ExceptionDemo {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ExceptionRegister {
 //        exceptionTest();
 
 //        runtimeExceptionText();
@@ -51,7 +52,9 @@ public class ExceptionDemo {
 //        throwsTest("C:");
 //        System.out.println("后续代码");
 
-        finallyTest();
+//        finallyTest();
+
+        registerException();
     }
 
     // 编译期异常
@@ -114,6 +117,15 @@ public class ExceptionDemo {
         }
         System.out.println(date);
         System.out.println("try-catch 抛出异常，后续代码可以继续运行");
+    }
+
+    // 自定义异常模拟
+    public static void registerException() throws ExceptionRegister {
+        String[] users = {"111", "222", "333"};
+        String user = "111";
+        if (Arrays.asList(users).contains(user)) {
+            throw new ExceptionRegister("该用户已经注册");
+        }
     }
 }
 
