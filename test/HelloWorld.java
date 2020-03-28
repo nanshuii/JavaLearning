@@ -608,6 +608,7 @@ public class HelloWorld {
 	/*
 	* Map
 	* HashMap 无序
+	* key-value可以是null
 	* LinkedHashMap 有序
 	*
 	* put
@@ -639,6 +640,9 @@ public class HelloWorld {
 		System.out.println(map + st1);
 		String st2 = map.put("1", "1 change");
 		System.out.println(map + st2);
+
+		map.put(null, null);
+		System.out.println(map);
 
 		System.out.println("==============");
 
