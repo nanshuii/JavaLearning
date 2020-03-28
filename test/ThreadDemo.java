@@ -24,6 +24,18 @@ import java.sql.SQLOutput;
 *
 * 匿名内部类方式实现线程的创建
 *
+* 线程安全
+* 让其他线程等待当前线程的操作之后再执行
+*
+* 解决方式:
+* 1. 同步代码块
+* synchronized(锁对象) { ... }
+* 锁对象可以是任何对象
+* 多个线程使用的锁对象是同一个锁对象
+* 同步中的线程没有执行完毕不会释放锁对象，同步外的线程没有锁对象进不去同步
+* 频繁判断锁，创建锁，释放锁，程序效率降低
+* 2.
+*
 * */
 public class ThreadDemo {
     public static void main(String[] args) {
@@ -32,8 +44,11 @@ public class ThreadDemo {
 
 //        threadTest02();
 
-        threadTest03();
+//        threadTest03();
 
+//        threadTest04();
+
+        threadTest05();
     }
 
     // 多线程的实现一
@@ -108,6 +123,113 @@ public class ThreadDemo {
                 }
             }
         }).start();
+    }
+
+    // 线程安全问题
+    public static void threadTest04() {
+        class Thread1 implements Runnable {
+
+            private int num = 20;
+
+            @Override
+            public void run() {
+                while (true) {
+                    if (num > 0) {
+                        try {
+                            Thread.sleep(10);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println(Thread.currentThread().getName() + "===" + num);
+                        num--;
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+
+        Thread1 thread1 = new Thread1();
+        Thread t1 = new Thread(thread1);
+        Thread t2 = new Thread(thread1);
+        Thread t3 = new Thread(thread1);
+        t1.start();
+        t2.start();
+        t3.start();
+
+    }
+
+    // 参照threadTest04()解决线程安全问题
+    // 同步代码块
+    public static void threadTest05() {
+        class Thread1 implements Runnable {
+
+            private int num = 20;
+
+            Object obj = new Object();
+
+            @Override
+            public void run() {
+                while (true) {
+                    synchronized (obj) {
+                        if (num > 0) {
+                            try {
+                                Thread.sleep(500);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            System.out.println(Thread.currentThread().getName() + "===" + num);
+                            num--;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        Thread1 thread1 = new Thread1();
+        Thread t1 = new Thread(thread1);
+        Thread t2 = new Thread(thread1);
+        Thread t3 = new Thread(thread1);
+        t1.start();
+        t2.start();
+        t3.start();
+    }
+
+    // 参照threadTest04()解决线程安全问题
+    //
+    public static void threadTest06() {
+        class Thread1 implements Runnable {
+
+            private int num = 20;
+
+            @Override
+            public void run() {
+                while (true) {
+                    if (num > 0) {
+                        try {
+                            Thread.sleep(10);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println(Thread.currentThread().getName() + "===" + num);
+                        num--;
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+
+        Thread1 thread1 = new Thread1();
+        Thread t1 = new Thread(thread1);
+        Thread t2 = new Thread(thread1);
+        Thread t3 = new Thread(thread1);
+        t1.start();
+        t2.start();
+        t3.start();
+
     }
 }
 
