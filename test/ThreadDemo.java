@@ -1,6 +1,9 @@
 package test;
 
 import java.sql.SQLOutput;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -56,6 +59,18 @@ import java.util.concurrent.locks.ReentrantLock;
 * 如果有多个等待，随机唤醒一个
 * notifyAll 如果有多个等待，唤醒所有等待的线程
 *
+* 线程池
+* 线程池的创建 指定线程数量
+* ExecutorService executorService = Executors.newFixedThreadPool(2);
+*
+* submit 传递线程任务（实现类），开启线程，执行run方法
+* 线程池会一直开启，使用完了线程，线程就会归还给线程池，继续使用
+* executorService.submit(new RunnableTest());
+* executorService.submit(new RunnableTest());
+* executorService.submit(new RunnableTest());
+*
+* 线程池的关闭
+* shutdown()
 *
 * */
 public class ThreadDemo {
@@ -75,7 +90,9 @@ public class ThreadDemo {
 
 //        threadTest07();
 
-        threadTest08();
+//        threadTest08();
+
+        threadTest09();
     }
 
     // 多线程的实现一
@@ -340,9 +357,21 @@ public class ThreadDemo {
         }.start();
     }
 
-    //
+    // 线程池
     public static void threadTest09() {
+        class RunnableTest implements Runnable{
+            @Override
+            public void run() {
+                System.out.println(Thread.currentThread().getName() + "创建了一个新的线程");
+            }
+        }
 
+        // 线程池的创建
+        ExecutorService executorService = Executors.newFixedThreadPool(2); // 指定线程数量的线程池
+        executorService.submit(new RunnableTest()); // submit 传递线程任务（实现类），开启线程，执行run方法
+        executorService.submit(new RunnableTest());
+        executorService.submit(new RunnableTest());
+        executorService.shutdown();
     }
 }
 
