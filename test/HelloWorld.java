@@ -13,7 +13,7 @@ public class HelloWorld {
 		System.out.println("Hello World!");
 //		test024(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 //		test025("hello", 1.11, 1, 2, 3);
-		test026();
+		test027();
 	}
 
 	// 练习：方法重载
@@ -701,6 +701,40 @@ public class HelloWorld {
 
 
 
+	}
+
+	/*
+	* lambda表达式
+	*
+	* 由三部分组成：
+	* 一些参数，一个箭头，一段代码
+	* (参数列表) -> {一段代码}
+	* ()接口中抽象方法的参数列表，没有就空，多个参数用逗号分割
+	* -> 参数传递
+	* {} 方法体
+	*
+	*
+	*
+	*
+	*
+	* */
+	public static void test027() {
+		// 之前的方式 实例化接口对象
+		test027Method(new Test015() {
+			@Override
+			public void method() {
+				System.out.println("实例化接口对象的方式");
+			}
+		});
+		// 使用lambda方式简化匿名内部类的书写
+		// 但有两个抽象方法时候貌似不能使用
+		test027Method(() -> {
+			System.out.println("使用lambda方式简化匿名内部类的书写");
+		});
+	}
+
+	public static void test027Method(Test015 test) {
+		test.method();
 	}
 }
 
