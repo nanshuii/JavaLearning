@@ -45,6 +45,17 @@ import java.util.concurrent.locks.ReentrantLock;
 * 加锁 lock.lock();
 * 解锁 lock.unlock();
 *
+* 线程状态
+* 计时等待 sleep
+* 锁阻塞 Blocked
+* 无限等待 Waiting
+* 等待和唤醒的线程只有一个，使用同步
+* wait等待
+* wait(毫秒) wait可以加一个时间，如果在指定时间内还没被唤醒，那么自动唤醒
+* notify唤醒
+* 如果有多个等待，随机唤醒一个
+* notifyAll 如果有多个等待，唤醒所有等待的线程
+*
 *
 * */
 public class ThreadDemo {
@@ -62,7 +73,9 @@ public class ThreadDemo {
 
 //        threadTest06();
 
-        threadTest07();
+//        threadTest07();
+
+        threadTest08();
     }
 
     // 多线程的实现一
@@ -293,6 +306,43 @@ public class ThreadDemo {
 
     }
 
+    // 线程之间的通信 wait notify
+    public static void threadTest08() {
+        Object obj = new Object();
+        new Thread() {
+            @Override
+            public void run() {
+                synchronized (obj) {
+                    System.out.println("告知另一个线程");
+                    try {
+                        obj.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("被唤醒了");
+                }
+            }
+        }.start();
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    System.out.println("五秒后唤醒另一个线程");
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                synchronized (obj) {
+                    System.out.println("五秒到了");
+                    obj.notify();
+                }
+            }
+        }.start();
+    }
 
+    //
+    public static void threadTest09() {
+
+    }
 }
 
