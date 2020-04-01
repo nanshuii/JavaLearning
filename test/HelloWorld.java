@@ -713,9 +713,10 @@ public class HelloWorld {
 	* -> 参数传递
 	* {} 方法体
 	*
-	*
-	*
-	*
+	* 可推导可省略
+	* 凡是根据上下文推导出来的内容，都可以省略书写；
+	* 1. (参数列表)：括号中参数列表的数据类型可以省略；括号中的参数如果只有一个，那么类型和括号都可以省略；
+	* 2. {一些代码}：大括号中的代码只有一行，无论是否有返回值，都可以省略 {}、return、分号，必须一起省略；
 	*
 	* */
 	public static void test027() {
@@ -731,10 +732,47 @@ public class HelloWorld {
 		test027Method(() -> {
 			System.out.println("使用lambda方式简化匿名内部类的书写");
 		});
+
+
+        test027Method2(1, 2, new Test016() {
+            @Override
+            public int method(int a, int b) {
+                return a + b;
+            }
+        });
+
+        // 带参数的lambda
+        test027Method2(3, 4, (int a, int b)->{
+            return a + b;
+        });
+
+        // 优化后的lambda
+        test027Method2(100, 200, (a, b) -> a + b);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(Thread.currentThread().getName() + " new Thread ");
+            }
+        }).start();
+
+        // lambda表达式
+        new Thread(() -> {
+            System.out.println(Thread.currentThread().getName() + " lambda new Thread ");
+        }).start();
+
+        // lambda表达式 优化
+        new Thread(() -> System.out.println(Thread.currentThread().getName() + " lambda new Thread ")).start();
+
 	}
 
 	public static void test027Method(Test015 test) {
 		test.method();
 	}
+
+	public static void test027Method2(int a, int b, Test016 test) {
+	    int num = test.method(a, b);
+        System.out.println("num = " + num);
+    }
 }
 
