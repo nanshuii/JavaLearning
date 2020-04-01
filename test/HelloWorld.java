@@ -1,3 +1,4 @@
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -13,7 +14,7 @@ public class HelloWorld {
 		System.out.println("Hello World!");
 //		test024(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 //		test025("hello", 1.11, 1, 2, 3);
-		test027();
+		test028();
 	}
 
 	// 练习：方法重载
@@ -773,6 +774,60 @@ public class HelloWorld {
 	public static void test027Method2(int a, int b, Test016 test) {
 	    int num = test.method(a, b);
         System.out.println("num = " + num);
+    }
+
+    /*
+    * File类
+    *
+    * 路径分隔符
+    * File.pathSeparator 返回String类型
+    * File.pathSeparatorChar 返回Char类型
+    * windows分号; linux冒号:
+    *
+    * 文件名称分隔符
+    * File.separator
+    * File.separatorChar
+    * windows反斜杠\ linux正斜杠/
+    *
+    * 路径不区分大小写
+    * windows分隔符使用反斜杠，反斜杠是转义字符，两个反斜杠代表一个普通的反斜杠
+    * 绝对路径
+    * 一个完整的路径
+    * 相对路径
+    * 一个简化的路径
+    *
+    * 创建一个文件实例
+    * new File(String pathname)
+    * new File(File parent, String child)
+    * new File(String parent, String child)
+    *
+    *
+    *
+    * */
+    public static void test028() {
+		System.out.println("路径分隔符 = " + File.pathSeparator); // windows分号; linux冒号:
+		System.out.println("路径分隔符 = " + File.pathSeparatorChar);
+		System.out.println("文件名称分隔符 = " + File.separator); // windows反斜杠\ linux正斜杠/
+		System.out.println("文件名称分隔符 = " + File.separatorChar);
+
+		System.out.println("================================");
+
+		File file = new File("com/test/demo/test001");
+		System.out.println(file);
+		File file1 = new File("com/test/demo");
+		System.out.println(file1);
+		File file2 = new File("G://", "ccc");
+		System.out.println(file2);
+
+		System.out.println("=========================");
+
+		File file3 = new File("com/test/demo/test001");
+		System.out.println(file3.getAbsolutePath()); // 获取绝对路径
+		System.out.println(file3.getPath()); // 获取相对路径
+		System.out.println(file3.toString()); // toString()相当于getPath()
+
+
+
     }
 }
 
