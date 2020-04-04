@@ -12,6 +12,7 @@
 #### Iterator 迭代器
 #### Map
 #### lambda表达式
+#### File类
 
 ------
 ## Scanner键盘输入
@@ -385,6 +386,65 @@ Set<Map.Entry<String, String>> set = map.entrySet();
 凡是根据上下文推导出来的内容，都可以省略书写；
 1. (参数列表)：括号中参数列表的数据类型可以省略；括号中的参数如果只有一个，那么类型和括号都可以省略；
 2. {一些代码}：大括号中的代码只有一行，无论是否有返回值，都可以省略 {}、return、分号，必须一起省略；
+----
+## File类
+#### 创建一个文件实例
+new File(String pathname)
+new File(File parent, String child)
+new File(String parent, String child)
+
+#### 路径
+##### 路径分隔符
+File.pathSeparator 返回String类型
+File.pathSeparatorChar 返回Char类型
+> windows分号; linux冒号:
+##### 文件名称分隔符
+File.separator
+File.separatorChar
+> windows反斜杠\ linux正斜杠/
+
+> 路径不区分大小写
+> windows分隔符使用反斜杠，反斜杠是转义字符，两个反斜杠代表一个普通的反斜杠
+> 绝对路径 一个完整的路径
+> 相对路径 一个简化的路径
+
+#### 获取路径
+getAbsolutePath() 获取绝对路径
+getPath() 获取相对路径
+toString() 相当于getPath()
+getName() 文件路径的结尾部分，文件/文件夹
+length() long类型，文件大小，以字节为单位；文件夹没有大小，为0；文件路径不存在，大小为0；
+exists() 路径是否存在
+isDirectory() 是否是目录
+isFile() 是否是文件
+
+#### 创建文件或目录
+createNewFile() 返回boolean
+new File一个文件地址 有一个IOException异常
+只能创建不存在文件
+如果创建的时候文件路径中的目录不存在，那么会抛出异常
+
+mkdir() 返回boolean
+new File一个文件夹地址
+只能创建不存在的单级文件夹
+
+mkdir() 返回boolean
+new File一个文件夹地址
+只能创建不存在的单级/多级文件夹
+
+#### 删除文件或目录
+delete() 返回boolean
+直接硬盘删除文件/文件夹，不进回收站
+文件夹里面有内容，删除不成功
+
+#### 遍历文件目录
+list() 返回String字符串数组
+返回目录下的文件/文件夹
+如果是不存在的目录，或者是文件，则返回null
+
+listFiles() 返回File对象数组
+返回目录下的文件/文件夹
+如果是不存在的目录，或者是文件，则返回null
 
 
 
