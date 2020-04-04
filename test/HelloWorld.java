@@ -15,7 +15,8 @@ public class HelloWorld {
 		System.out.println("Hello World!");
 //		test024(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 //		test025("hello", 1.11, 1, 2, 3);
-		test028();
+//		test028();
+		test029(new File("com/test/demo"));
 	}
 
 	// 练习：方法重载
@@ -913,6 +914,23 @@ public class HelloWorld {
 		File[] file15List = file15.listFiles();
 		for (File file16 : file15List) {
 			System.out.println(file16);
+		}
+	}
+
+	/*
+	* 文件过滤器
+	* */
+	public static void test029(File file) {
+		if (file.isDirectory()) {
+			// 传递过滤器对象
+			File[] files = file.listFiles(new Test017());
+			for (File file1 : files) {
+				if (file1.isFile()) {
+					System.out.println(file1);
+				} else {
+					test029(file1);
+				}
+			}
 		}
 	}
 }
