@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -801,7 +802,40 @@ public class HelloWorld {
     * new File(File parent, String child)
     * new File(String parent, String child)
     *
+    * getAbsolutePath() 获取绝对路径
+    * getPath() 获取相对路径
+    * toString() 相当于getPath()
+    * getName() 文件路径的结尾部分，文件/文件夹
+    * length() long类型，文件大小，以字节为单位；文件夹没有大小，为0；文件路径不存在，大小为0；
     *
+    * exists() 路径是否存在
+    * isDirectory() 是否是目录
+    * isFile() 是否是文件
+    *
+    * createNewFile() 返回boolean
+    * new File一个文件地址 有一个IOException异常
+    * 只能创建不存在文件
+    * 如果创建的时候文件路径中的目录不存在，那么会抛出异常
+    *
+    * mkdir() 返回boolean
+    * new File一个文件夹地址
+    * 只能创建不存在的单级文件夹
+    *
+    * mkdir() 返回boolean
+    * new File一个文件夹地址
+    * 只能创建不存在的单级/多级文件夹
+    *
+    * delete() 返回boolean
+    * 直接硬盘删除文件/文件夹，不进回收站
+    * 文件夹里面有内容，删除不成功
+    *
+    * list() 返回String字符串数组
+    * 返回目录下的文件/文件夹
+    * 如果是不存在的目录，或者是文件，则返回null
+    *
+    * listFiles() 返回File对象数组
+    * 返回目录下的文件/文件夹
+    * 如果是不存在的目录，或者是文件，则返回null
     *
     * */
     public static void test028() {
@@ -821,13 +855,65 @@ public class HelloWorld {
 
 		System.out.println("=========================");
 
-		File file3 = new File("com/test/demo/test001");
+		File file3 = new File("com/test/demo/test001.java");
 		System.out.println(file3.getAbsolutePath()); // 获取绝对路径
 		System.out.println(file3.getPath()); // 获取相对路径
 		System.out.println(file3.toString()); // toString()相当于getPath()
+		System.out.println(file3.getName()); // 文件路径的结尾部分，文件/文件夹
+		System.out.println(file3.length()); // long类型，文件大小，以字节为单位
 
+		System.out.println("=======================");
 
+		File file4 = new File("com/test/demo/test002.java");
+		System.out.println(file4.exists()); // 路径是否存在
+		System.out.println(file4.isDirectory()); // 是否是目录
+		System.out.println(file4.isFile()); // 是否是文件
 
-    }
+		System.out.println("=======================");
+
+		File file5 = new File("com/test/demo/testFile.java");
+		try {
+			System.out.println(file5.createNewFile());
+		} catch (IOException e) {
+//			e.printStackTrace();
+		}
+		File file6 = new File("com/test/demo/demo00/test.java");
+		try {
+			System.out.println(file6.createNewFile());
+		} catch (IOException e) {
+//			e.printStackTrace();
+		}
+		File file7 = new File("com/test/demo/demo_mkdir");
+		System.out.println(file7.mkdir());
+		File file8 = new File("com/test/demo/demo00/demo_mkdir");
+		System.out.println(file8.mkdir());
+		File file9 = new File("com/test/demo/demo_mkdirs/0001");
+		System.out.println(file9.mkdirs());
+
+		System.out.println("===========");
+
+		File file10 = new File("com/test/demo/demo_mkdir");
+		System.out.println(file10.delete());
+		File file11 = new File("com/test/demo/demo_mkdir");
+		System.out.println(file11.delete());
+		File file12 = new File("com/test/demo/testFile.java");
+		System.out.println(file12.delete());
+		File file13 = new File("com/test/demo/demo_mkdirs/0001");
+		System.out.println(file13.delete());
+
+		System.out.println("======================");
+
+		File file14 = new File("com/test/demo");
+		String[] file14List = file14.list();
+		for (String s : file14List) {
+			System.out.println(s);
+		}
+
+		File file15 = new File("com/test/demo");
+		File[] file15List = file15.listFiles();
+		for (File file16 : file15List) {
+			System.out.println(file16);
+		}
+	}
 }
 
