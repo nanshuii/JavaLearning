@@ -5,6 +5,8 @@ package test;
 *
 * 字节输出
 *
+* OutputStream()
+*
 * public void close()
 * 关闭此输出流并释放与此流相关联的任何系统资源
 *
@@ -52,6 +54,8 @@ package test;
 *
 * 字节输入
 *
+* InputStream()
+*
 * public int read()
 * 从输入流中读取数据的下一个字节
 * 读取到文件的末尾返回-1
@@ -75,6 +79,55 @@ package test;
 *
 *
 *
+*
+* 字符输入
+*
+* Reader()
+*
+* public int read()
+* 读取单个字符
+* 读取到文件的末尾返回-1
+*
+* public int read(char[] cbuf)
+* 读取多个字符进入数组
+*
+* public void close()
+* 关闭释放文件资源
+*
+*
+*
+* FileReader() extends InputStreamReader extends Reader 文件字符输入流
+* 把硬盘文件中的数据以字符的方式读取到内存中
+*
+* 构造方法
+* FileReader(String filename)
+* FileReader(File file)
+*
+*
+*
+* 字符输出
+*
+* Writer()
+*
+* public void write(int c) 写入字符
+* public void write(char[] cbuf) 写入字符数组
+* public abstract void write(char[] cbuf, int off, int len) 写入字符数组的某一部分，off 数组的开始索引，len 写的字符个数
+* public void write(String string) 写入字符串
+* public void write(String string, int off, int len) 写入字符串的某一部分，off 字符串的开始索引，len 写的字符个数
+* public void flush() 刷新该流的缓存
+* public void close() 关闭此流，但要先刷新
+*
+*
+* FileWriter() extends OutputStreamWriter extends Writer 文件字符输出流
+* 把内存中的字符写入到文件夹中
+*
+* 构造方法
+* FileWriter(String filename)
+* FileWriter(File file)
+*
+*
+*
+*
 * */
 
 import java.io.*;
@@ -82,7 +135,7 @@ import java.util.Arrays;
 
 public class IODemo {
     public static void main(String[] args) throws IOException {
-        test06();
+        test09();
     }
 
     // 由内存写入硬盘
@@ -157,4 +210,31 @@ public class IODemo {
         fileOutputStream.close();
     }
 
+    // FileReader read
+    public static void test07() throws IOException {
+        FileReader fileReader = new FileReader("com/test/demo/test02.txt");
+        int len;
+        while ((len = fileReader.read()) != -1) {
+            System.out.print((char)len);
+        }
+        fileReader.close();
+    }
+
+    // FileReader read
+    public static void test08() throws IOException {
+        FileReader fileReader = new FileReader("com/test/demo/test02.txt");
+        char[] chars = new char[1024];
+        int len;
+        while ((len = fileReader.read(chars)) != -1) {
+            System.out.println(len);
+            String string = new String(chars, 0, len);
+            System.out.println(string);
+        }
+        fileReader.close();
+    }
+
+    // FilerWriter
+    public static void test09() throws IOException {
+
+    }
 }
