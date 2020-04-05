@@ -13,6 +13,10 @@
 #### Map
 #### lambda表达式
 #### File类
+#### 字节输出
+#### 字节输入
+#### 字符输入
+#### 字符输出
 
 ------
 ## Scanner键盘输入
@@ -445,6 +449,115 @@ list() 返回String字符串数组
 listFiles() 返回File对象数组
 返回目录下的文件/文件夹
 如果是不存在的目录，或者是文件，则返回null
+-----
+## 字节输出
+#### OutputStream()
+public void close()
+关闭此输出流并释放与此流相关联的任何系统资源
+
+public void flush()
+刷新此输出流并强制任何缓冲的输出字节被写出
+
+public void write(byte[] b)
+将b.length字节从指定的字节数组写入此输出流
+如果写入的byte数组中第一个字节是正数（0-127），那么显示的时候会调用ASCII表
+如果写入的byte数组中第一个字节是负数，第一个字节会和第二个字节组合成一个中文，显示的时候调用系统码表
+
+public void write(byte[] b, int off, int len)
+从指定的字节数组写入len字节，从偏移量off开始输出到此输出流
+
+public void abstract void write(int b)
+将指定的字节输出流
+#### 文件字节输出流
+FileOutputStream extends OutputStream
+把内存中的数据写入到硬盘的文件中
+
+构造方法：
+FileOutputStream(String name)
+创建一个向具有指定名称的文件中写入数据的输出文件流
+
+FileOutputStream(File file)
+创建一个向指定File对象表示的文件中写入数据的文件输出流
+
+FileOutputStream(String name, boolean append)
+创建一个向具有指定name的文件中写入数据的输出文件夹流
+append true 创建对象不会覆盖原文件，继续在文件的末尾追加写数据
+append false 创建对象会覆盖原文件
+
+FileOutputStream(File file, boolean append)
+创建一个向指定File对象表示的文件中写入数据的文件输出流
+append true 创建对象不会覆盖原文件，继续在文件的末尾追加写数据
+append false 创建对象会覆盖原文件
+#### 换行符号
+windows \r\n
+linux \n
+mac \r
+
+-------
+## 字节输入
+#### InputStream()
+public int read()
+从输入流中读取数据的下一个字节
+读取到文件的末尾返回-1
+
+public int read(byte[] b)
+从输入流中读取一定数量的字节，并将其存储在缓冲区数组b中
+一般byte数组存储1024倍数的长度，1kb
+int 返回的是byte数组中的真实字节数量
+可以使用String类型的构造把读取的字节转换成String
+String string = new String(bytes, 0, len);
+
+public void close()
+关闭此输入流并释放与该流关联的所有系统资源
+
+#### 文件字节输入流
+FileInputStream extends InputStream 
+把硬盘文件中的数据，读取到内存中使用
+
+构造方法
+FileInputStream(String name)
+FileInputStream(File file)
+
+----
+## 字符输入
+#### Reader()
+public int read()
+读取单个字符
+读取到文件的末尾返回-1
+
+public int read(char[] cbuf)
+读取多个字符进入数组
+
+public void close()
+关闭释放文件资源
+
+#### 文件字符输入流
+FileReader() extends InputStreamReader extends Reader
+把硬盘文件中的数据以字符的方式读取到内存中
+
+构造方法
+FileReader(String filename)
+FileReader(File file)
+
+---
+## 字符输出
+#### Writer()
+public void write(int c) 写入字符
+public void write(char[] cbuf) 写入字符数组
+public abstract void write(char[] cbuf, int off, int len) 写入字符数组的某一部分，off 数组的开始索引，len 写的字符个数
+public void write(String string) 写入字符串
+public void write(String string, int off, int len) 写入字符串的某一部分，off 字符串的开始索引，len 写的字符个数
+public void flush() 刷新该流的缓存
+public void close() 关闭此流，但要先刷新
+
+#### 文件字符输出流
+FileWriter() extends OutputStreamWriter extends Writer
+把内存中的字符写入到文件夹中
+
+构造方法
+FileWriter(String filename)
+FileWriter(File file)
+写入的时候是写入到内存缓冲区，写完之后flush，也可以是直接close（也做了刷新操作）
 
 
 

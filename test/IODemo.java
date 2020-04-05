@@ -124,6 +124,7 @@ package test;
 * 构造方法
 * FileWriter(String filename)
 * FileWriter(File file)
+* 写入的时候是写入到内存缓冲区，写完之后flush，也可以是直接close（也做了刷新操作）
 *
 *
 *
@@ -135,7 +136,7 @@ import java.util.Arrays;
 
 public class IODemo {
     public static void main(String[] args) throws IOException {
-        test09();
+        test12();
     }
 
     // 由内存写入硬盘
@@ -235,6 +236,67 @@ public class IODemo {
 
     // FilerWriter
     public static void test09() throws IOException {
+        FileWriter fileWriter = new FileWriter("com/test/demo/test03.txt");
+        fileWriter.write(97);
+//        fileWriter.flush();
+        fileWriter.close();
 
+        FileWriter fileWriter1 = new FileWriter("com/test/demo/test03.txt");
+        char[] chars = {'a', 'b', 'c', 'd', 'e', 'f', 'g'};
+        fileWriter1.write(chars);
+        fileWriter1.write("字符串");
+        fileWriter1.close();
+
+        FileWriter fileWriter2 = new FileWriter("com/test/demo/test04.txt");
+        fileWriter2.write(chars, 1, 3);
+        fileWriter2.write("xxxxx写字符串的一部分xxxxx", 5, 8);
+        fileWriter2.close();
+    }
+
+    // try-catch-finally处理异常
+    public static void test10() {
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter("faker/test/demo/test05.txt", false);
+            for (int i = 0; i < 10; i++) {
+                fileWriter.write("hhhhhh");
+                fileWriter.write("\r\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fileWriter != null) {
+                try {
+                    fileWriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    // JDK7 try-catch try()之后定义流对象，try之后会自动释放
+    public static void test11() {
+        try(FileWriter fileWriter = new FileWriter("faker/com.txt")) {
+            for (int i = 0; i < 10; i++) {
+                fileWriter.write("hhhhhh");
+                fileWriter.write("\r\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // JDK9 tyr-catch try前面可以定义，try()引用变量名，try执行完毕之后会自动释放
+    public static void test12() throws IOException {
+        FileWriter fileWriter = new FileWriter("faker/com.txt");
+        try(fileWriter) {
+            for (int i = 0; i < 10; i++) {
+                fileWriter.write("hhhhhh");
+                fileWriter.write("\r\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
