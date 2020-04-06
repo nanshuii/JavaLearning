@@ -131,12 +131,31 @@ package test;
 *
 * */
 
+/*
+* 缓冲流
+*
+* BufferedOutputStream extends OutputStream
+* 字节缓冲输出流
+*
+* 继承自父类的方法：
+* public void close() 关闭资源
+* public void flush() 刷新
+* public void write(byte[] b) 写入数组b
+* public void write(byte[] b, off, len) 从off开始写入len长度的数组b
+* public abstract void write(int b) 将指定的字节输出流
+*
+* 构造方法：
+* BufferedOutputStream (OutputStream out) 创建一个新的缓冲输出流，以将数据写入指定的底层输出流
+* BufferedOutputStream (OutputStream out, int size) 创建一个新的缓冲输出流，以将具有指定缓冲区大小的数据写入指定的底层输出流
+*
+* */
+
 import java.io.*;
 import java.util.Arrays;
 
 public class IODemo {
     public static void main(String[] args) throws IOException {
-        test12();
+        test13();
     }
 
     // 由内存写入硬盘
@@ -299,4 +318,14 @@ public class IODemo {
             e.printStackTrace();
         }
     }
+
+    // 字节缓冲输出流
+    public static void test13() throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream("com/test/demo/test07.txt");
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
+        bufferedOutputStream.write("字节缓冲输出流".getBytes());
+        bufferedOutputStream.close();
+    }
+
+
 }
