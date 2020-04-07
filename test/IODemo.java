@@ -148,6 +148,26 @@ package test;
 * BufferedOutputStream (OutputStream out) 创建一个新的缓冲输出流，以将数据写入指定的底层输出流
 * BufferedOutputStream (OutputStream out, int size) 创建一个新的缓冲输出流，以将具有指定缓冲区大小的数据写入指定的底层输出流
 *
+* BufferedInputStream extends InputStream
+* 字节缓冲输入流
+*
+* 继承自父类的方法：
+ * public int read()
+ * 从输入流中读取数据的下一个字节
+ * 读取到文件的末尾返回-1
+ * public int read(byte[] b)
+ * 从输入流中读取一定数量的字节，并将其存储在缓冲区数组b中
+ * 一般byte数组存储1024倍数的长度，1kb
+ * int 返回的是byte数组中的真实字节数量
+ * 可以使用String类型的构造把读取的字节转换成String
+ * String string = new String(bytes, 0, len);
+ * public void close()
+ * 关闭此输入流并释放与该流关联的所有系统资源
+ *
+ * 构造方法：
+ * BufferedInputStream (InputStream in) 创建一个新的缓冲输入流，并保存其参数in
+ * BuggeredInputStream (InputStream in, int size) 创建一个新的指定缓冲区大小的缓冲输入流，并保存其参数in
+*
 * */
 
 import java.io.*;
@@ -155,7 +175,7 @@ import java.util.Arrays;
 
 public class IODemo {
     public static void main(String[] args) throws IOException {
-        test13();
+        test14();
     }
 
     // 由内存写入硬盘
@@ -325,6 +345,19 @@ public class IODemo {
         BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
         bufferedOutputStream.write("字节缓冲输出流".getBytes());
         bufferedOutputStream.close();
+    }
+
+    // 字节缓冲输入流
+    public static void test14() throws IOException {
+        FileInputStream fileInputStream = new FileInputStream("com/test/demo/test07.txt");
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+        byte[] bytes = new byte[1204];
+        int len;
+        while ((len = bufferedInputStream.read(bytes)) != -1) {
+            System.out.println(len);
+            String string = new String(bytes, 0, len);
+            System.out.println(string);
+        }
     }
 
 
