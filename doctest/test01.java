@@ -20,8 +20,4 @@ public class test01 {
         return a + b;
     }
 
-    @TestAnnoation
-    public int ann() {
-
-    }
 }
