@@ -51,7 +51,7 @@ public class jdbctest04 {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        JDBCUtils.close(resultSet, statement, connection);
+//        JDBCUtils.close(resultSet, statement, connection);
         return list;
     }
 }
