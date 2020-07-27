@@ -1,8 +1,13 @@
 package jdbctest;
 
+import DruidTest.DruidTest01;
+import com.alibaba.druid.pool.DruidDataSourceFactory;
+
+import javax.sql.DataSource;
 import javax.xml.transform.Result;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.*;
 import java.util.Properties;
@@ -36,6 +41,27 @@ public class JDBCUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 获取DataSource
+     * @return
+     */
+    public static DataSource getDataSource() {
+        Properties properties = new Properties();
+        DataSource dataSource = null;
+        InputStream inputStream = DruidTest01.class.getClassLoader().getResourceAsStream("DruidTest/druid.properties");
+        try {
+            properties.load(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            dataSource = DruidDataSourceFactory.createDataSource(properties);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dataSource;
     }
 
     /**

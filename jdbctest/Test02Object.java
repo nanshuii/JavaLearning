@@ -1,18 +1,18 @@
 package jdbctest;
 
 public class Test02Object {
-    private int id;
+    private Integer id;
     private String name;
-    private int age;
-    private int endlish;
-    private int math;
+    private Integer age;
+    private Integer endlish;
+    private Integer math;
     private String sex;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -24,27 +24,27 @@ public class Test02Object {
         this.name = name;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
-    public int getEndlish() {
+    public Integer getEndlish() {
         return endlish;
     }
 
-    public void setEndlish(int endlish) {
+    public void setEndlish(Integer endlish) {
         this.endlish = endlish;
     }
 
-    public int getMath() {
+    public Integer getMath() {
         return math;
     }
 
-    public void setMath(int math) {
+    public void setMath(Integer math) {
         this.math = math;
     }
 
