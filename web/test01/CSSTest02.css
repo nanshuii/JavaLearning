@@ -1,0 +1,27 @@
+#id1{
+    color: red;
+}
+
+div{
+    color: green;
+}
+
+.class1{
+    color: blue;
+}
+
+div p {
+    color: red;
+}
+
+div > p {
+    border: 1px solid;
+}
+
+input[type="text"]{
+     border: 5px solid;
+ }
+
+a:link{
+    color: red;
+}
