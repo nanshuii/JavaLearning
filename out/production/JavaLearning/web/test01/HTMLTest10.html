@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>灯泡的开关</title>
+</head>
+<body>
+    <img id="light" src="images/off.gif">
+
+</body>
+<script>
+    let flag = false;
+    let light = document.getElementById("light");
+    light.onclick = function () {
+        flag = !flag;
+        if (flag) {
+            light.src = "images/on.gif";
+        } else {
+            light.src = "images/off.gif";
+        }
+    }
+</script>
+</html>
