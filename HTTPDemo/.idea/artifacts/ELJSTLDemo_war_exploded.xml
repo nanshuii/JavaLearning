@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ELJSTLDemo:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ELJSTLDemo_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="ELJSTLDemo/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ELJSTLDemo" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
