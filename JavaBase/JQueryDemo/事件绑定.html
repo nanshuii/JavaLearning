@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JQuery</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#btn2").click(function () {
+                alert("btn2被点击了");
+            });
+        });
+        $(function () {
+            $("#btn2").css("backgroundColor", "red");
+        });
+    </script>
+</head>
+<body>
+    <div id="div1">div111</div>
+    <div id="div2">div222</div>
+    <input id="btn1" type="button" value="点我">
+    <input id="btn2" type="button" value="点我">
+
+    <script>
+        // 给btn1添加单击事件
+        $("#btn1").click(function () {
+            alert("btn1被点击了");
+        });
+
+    </script>
+
+</body>
+</html>

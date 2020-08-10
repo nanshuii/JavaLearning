@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JQuery</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div id="div1">div111</div>
+    <div id="div2">div222</div>
+
+    <script>
+        // 可以当作数组
+        let divs = document.getElementsByTagName("div");
+        // 可以当作数据
+        let $divs = $("div");
+        // alert(divs);
+        // alert($divs);
+
+        // js --> jq
+        let $1 = $(divs);
+        alert($1);
+        // jq --> js
+
+
+    </script>
+
+</body>
+</html>
