@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/JSONDemo/JSONDemo.iml" filepath="$PROJECT_DIR$/JSONDemo/JSONDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/JSPDemo/JSPDemo.iml" filepath="$PROJECT_DIR$/JSPDemo/JSPDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/ListenerDemo/ListenerDemo.iml" filepath="$PROJECT_DIR$/ListenerDemo/ListenerDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RedisDemo/RedisDemo.iml" filepath="$PROJECT_DIR$/RedisDemo/RedisDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/SessionDemo/SessionDemo.iml" filepath="$PROJECT_DIR$/SessionDemo/SessionDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/cookieDemo/cookieDemo.iml" filepath="$PROJECT_DIR$/cookieDemo/cookieDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo1/demo1.iml" filepath="$PROJECT_DIR$/demo1/demo1.iml" />
