@@ -100,7 +100,7 @@
 </head>
 <body><!-------------------reg-------------------------->
 <div class="reg">
-    <form action="register" method="post"><h1><a href="index.html"><img src="img/temp/logo.png"></a></h1>
+    <form action="register" method="post"><h1><a href="index.jsp"><img src="img/temp/logo.png"></a></h1>
         <p><h1 style="padding: 0px;margin: 0px;font-size: 30px;background-color: blue;text-align: center;line-height: 60px;color: #ffffff;">用户注册</h1></p>
         <p><input type="text" name="username" value="" placeholder="请输入用户名" onfocus="FocusItem(this)" onblur="BlurItem(this)"><span></span></p>
         <p><input type="text" name="name" value="" placeholder="请输入姓名" onfocus="FocusItem(this)" onblur="BlurItem(this)"><span></span></p>
