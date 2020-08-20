@@ -204,6 +204,93 @@ public class UserDao {
     }
 
     /**
+     * 查找具有相同USER_ID的对象的数量
+     * @param username USER_ID
+     * @return 数量
+     */
+    public static int selectByUsername(String username) {
+        int count = 0;
+        String sql = "select count(*) from USER where USER_ID = ?";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        connection = BaseDao.getConnection();
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                count = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            BaseDao.closeAll(resultSet, preparedStatement, connection);
+        }
+        return count;
+    }
+
+    /**
+     * 通过USER_ID和USER_PASSWORD查询用户
+     * @param username USER_ID
+     * @param password USER_PASSWORD
+     * @return 用户数组
+     */
+    public static ArrayList<USER> selectByUsernameAndPassword(String username, String password) {
+        ArrayList<USER> users = new ArrayList<USER>();
+        String sql = "select * from USER where USER_ID = ? and USER_PASSWORD = ?";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        connection = BaseDao.getConnection();
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                USER user = getUSERFromResult(resultSet);
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            BaseDao.closeAll(resultSet, preparedStatement, connection);
+        }
+        return users;
+    }
+
+    /**
+     * 通过USER_ID和USER_PASSWORD查询admin用户
+     * @param username USER_ID
+     * @param password USER_PASSWORD
+     * @return 用户数组
+     */
+    public static ArrayList<USER> selectAdminByUsernameAndPassword(String username, String password) {
+        ArrayList<USER> users = new ArrayList<USER>();
+        String sql = "select * from USER where USER_ID = ? and USER_PASSWORD = ? and USER_STATUS = 2";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        connection = BaseDao.getConnection();
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                USER user = getUSERFromResult(resultSet);
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            BaseDao.closeAll(resultSet, preparedStatement, connection);
+        }
+        return users;
+    }
+
+    /**
      * 更新用户信息
      * @param user USER
      * @return 大于0表示成功

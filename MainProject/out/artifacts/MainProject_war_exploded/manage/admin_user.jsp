@@ -32,7 +32,6 @@
                     <div class="result-list">
                         <a href="admin_userAdd.jsp"><i class="icon-font"></i>新增用户</a>
                         <a id="batchDel" href="javascript:deleteUsers('确认删除这些用户？', 'myform')"><i class="icon-font"></i>批量删除</a>
-<%--                        <a id="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>--%>
                     </div>
                 </div>
                 <div class="result-content">
