@@ -25,6 +25,7 @@ public class AdminLogin extends HttpServlet {
         String password = req.getParameter("password");
         // 获取用户，进行判断
         ArrayList<USER> users = UserDao.selectAdminByUsernameAndPassword(username, password);
+        System.out.println("users = " + users);
         if (!users.isEmpty()) {
             USER user = users.get(0);
             HttpSession session = req.getSession();
