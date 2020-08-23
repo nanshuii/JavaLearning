@@ -40,6 +40,47 @@ public class CategoryDao {
     }
 
     /**
+     * 获取一级二级分类
+     * @param parent 0 一级分类；-1 二级分类；其他 改父分类下的子分类
+     * @return CATEGORY数组
+     */
+    public static ArrayList<CATEGORY> selectAll(int parent) {
+        ArrayList<CATEGORY> categories = new ArrayList<CATEGORY>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String sql = null;
+        connection = BaseDao.getConnection();
+        try {
+            if (parent == 0) {
+                // 获取所有的一级分类
+                sql = "select * from CATEGORY where CATE_PARENT_ID = 0 order by CATE_ID ASC";
+                preparedStatement = connection.prepareStatement(sql);
+            } else if (parent == -1) {
+                // 获取所有的二级分类
+                sql = "select * from CATEGORY where CATE_PARENT_ID != 0";
+                preparedStatement = connection.prepareStatement(sql);
+            } else {
+                sql = "select * from CATEGORY where CATE_PARENT_ID = ?";
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1, parent);
+            }
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                CATEGORY category = getCategoryByResultSet(resultSet);
+                if (category != null) {
+                    categories.add(category);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            BaseDao.closeAll(resultSet, preparedStatement, connection);
+        }
+        return categories;
+    }
+
+    /**
      * 通过ResultSet获取CATEGORY
      * @param resultSet resultSet
      * @return CATEGORY

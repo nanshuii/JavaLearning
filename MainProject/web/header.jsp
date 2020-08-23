@@ -25,7 +25,18 @@
         </div>
     </div>
     <ul class="clearfix" id="bott">
-        <li><a href="index.html">首页</a></li>
+        <li><a href="indexSelect">首页</a></li>
+        <c:forEach items="${cate_parent_list}" var="cate_parent">
+            <li><a href="productSelect?id=${cate_parent.CATE_ID}&name=${cate_parent.CATE_NAME}">${cate_parent.CATE_NAME}</a>
+                <div class="sList2">
+                    <div class="clearfix">
+                        <c:forEach items="${cate_child_map.get(cate_parent.CATE_ID)}" var="cate_child">
+                            <a href="productSelect?id=${cate_child.CATE_ID}&name=${cate_child.CATE_NAME}&parentId=${cate_parent.CATE_ID}&parentName=${cate_parent.CATE_NAME}">${cate_child.CATE_NAME}</a>
+                        </c:forEach>
+                    </div>
+                </div>
+            </li>
+        </c:forEach>
         <li><a href="#">所有商品</a>
             <div class="sList">
                 <div class="wrapper  clearfix"><a href="paint.html">
@@ -56,18 +67,5 @@
                 </a></div>
             </div>
         </li>
-        <li><a href="flowerDer.html">装饰摆件</a>
-            <div class="sList2">
-                <div class="clearfix"><a href="proList.html">干花花艺</a><a href="vase_proList.html">花瓶花器</a></div>
-            </div>
-        </li>
-        <li><a href="decoration.html">布艺软饰</a>
-            <div class="sList2">
-                <div class="clearfix"><a href="zbproList.html">桌布罩件</a><a href="bzproList.html">抱枕靠垫</a></div>
-            </div>
-        </li>
-        <li><a href="paint.html">墙式壁挂</a></li>
-        <li><a href="perfume.html">蜡艺香薰</a></li>
-        <li><a href="idea.html">创意家居</a></li>
     </ul>
 </div>
