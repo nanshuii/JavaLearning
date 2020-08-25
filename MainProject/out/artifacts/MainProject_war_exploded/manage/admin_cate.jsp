@@ -11,27 +11,13 @@
 <div class="main-wrap">
 
     <div class="crumb-wrap">
-        <div class="crumb-list"><i class="icon-font"></i><a href="index.html">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">用户管理</span></div>
-    </div>
-    <div class="search-wrap">
-        <div class="search-content">
-            <form action="admin_doUserSelect" method="get">
-                <table class="search-tab">
-                    <tr>
-                        <th width="70">用户名:</th>
-                        <td><input class="common-text" placeholder="用户名" name="keywords" value="${param.keywords}" id="" type="text"></td>
-                        <td><input class="btn btn-primary btn2" type="submit"></td>
-                    </tr>
-                </table>
-            </form>
-        </div>
+        <div class="crumb-list"><i class="icon-font"></i><a href="admin_index.jsp">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">分类管理</span></div>
     </div>
     <div class="result-wrap">
         <form action="admin_doUserDelete" name="myform" id="myform" method="post">
             <div class="result-title">
                 <div class="result-list">
                     <a href="admin_cateAdd"><i class="icon-font"></i>新增分类</a>
-                    <a id="batchDel" href="javascript:deleteCates('确认删除这些分类？', 'myform')"><i class="icon-font"></i>批量删除</a>
                 </div>
             </div>
             <div class="result-content">
@@ -75,9 +61,6 @@
         if (confirm(msg)) {
             location.href = "admin_doCateDelete?id="+id;
         }
-    }
-    function deleteCates(msg, ids) {
-
     }
 </script>
 </body>
