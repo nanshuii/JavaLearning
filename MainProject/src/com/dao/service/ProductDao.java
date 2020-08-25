@@ -35,13 +35,49 @@ public class ProductDao {
      * @return ArrayList<PRODUCT>
      */
     public static ArrayList<PRODUCT> selectAll() {
-        ArrayList<PRODUCT> products = new ArrayList<PRODUCT>();
         String sql = "select * from PRODUCT";
+        return select(sql, -1, -1);
+    }
+
+    /**
+     * 筛选分类获取PRODUCT
+     * @param parentId 父分类；
+     * @param childId 子分类；-1时表示不筛选子分类
+     * @return
+     */
+    public static ArrayList<PRODUCT> selectByCateId(int parentId, int childId) {
+        String sql = "select * from PRODUCT where PRODUCT_FID = ?";
+        if (childId != -1) {
+            sql = "select * from PRODUCT where PRODUCT_FID = ? and PRODUCT_CID = ?";
+        }
+        return select(sql, parentId, childId);
+    }
+
+    /**
+     * 选择商品
+     * @param sql sql
+     * @param parentId 父分类；
+     * @param childId 子分类；-1时表示不筛选子分类
+     * @return ArrayList<PRODUCT>
+     */
+    private static ArrayList<PRODUCT> select(String sql, int parentId, int childId) {
+        ArrayList<PRODUCT> products = new ArrayList<PRODUCT>();
         Connection connection = BaseDao.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(sql);
+            if (parentId == -1 && childId == -1) {
+                // 全部商品
+
+            } else if (parentId != -1 && childId == -1) {
+                // 只选择父分类的
+                preparedStatement.setInt(1, parentId);
+            } else if (parentId != -1 && childId != -1) {
+                // 选择父分类和子分类的
+                preparedStatement.setInt(1, parentId);
+                preparedStatement.setInt(2, childId);
+            }
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 PRODUCT product = productByResultSet(resultSet);
@@ -56,6 +92,35 @@ public class ProductDao {
         }
         return products;
     }
+
+    /**
+     * 通过id查询PRODUCT
+     * @param id id
+     * @return PRODUCT
+     */
+    public static PRODUCT productGetById(int id) {
+        PRODUCT product = null;
+        String sql = "select * from PRODUCT where PRODUCT_ID = ?";
+        Connection connection = BaseDao.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                product = productByResultSet(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            BaseDao.closeAll(resultSet, preparedStatement, connection);
+        }
+        return product;
+    }
+
+
+
 
     /**
      * 通过resultSet获取product

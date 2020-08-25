@@ -1,7 +1,9 @@
 package com.http.servlet.home;
 
 import com.dao.service.CategoryDao;
+import com.dao.service.ProductDao;
 import com.entity.CATEGORY;
+import com.entity.PRODUCT;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,6 +48,20 @@ public class productSelect extends HttpServlet {
         req.setAttribute("name", name);
         req.setAttribute("parentId", parentId);
         req.setAttribute("parentName", parentName);
+
+        // 获取商品列表
+        int parentIdInt = -1;
+        int childIdInt = -1;
+        if (parentId != null) {
+            // 说明有子分类和父分类
+            parentIdInt = Integer.parseInt(parentId);
+            childIdInt = Integer.parseInt(id);
+        } else {
+            // 说明只有父分类
+            parentIdInt = Integer.parseInt(id);
+        }
+        ArrayList<PRODUCT> products = ProductDao.selectByCateId(parentIdInt, childIdInt);
+        req.setAttribute("product_list", products);
 
         req.getRequestDispatcher("productList.jsp").forward(req, resp);
     }

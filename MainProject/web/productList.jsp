@@ -43,6 +43,15 @@
     </div>
 </div><!----------------proList------------------------->
 <ul class="proList wrapper clearfix">
+    <c:forEach items="${product_list}" var="product">
+        <li><a href="productDetail?id=${product.PRODUCT_ID}">
+            <dl>
+                <dt><img src="/MainProject_war_exploded${product.PRODUCT_FILENAME}"></dt>
+                <dd>${product.PRODUCT_NAME}</dd>
+                <dd>￥${product.PRODUCT_PRICE}</dd>
+            </dl>
+        </a></li>
+    </c:forEach>
     <li><a href="proDetail.html">
         <dl>
             <dt><img src="img/temp/pro01.jpg"></dt>
