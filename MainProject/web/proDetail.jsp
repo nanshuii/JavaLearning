@@ -36,7 +36,7 @@
             </div>
             <div class="fr intro">
                 <div class="title"><h4>${product.PRODUCT_NAME}</h4>
-                    <p>${product.PRODUCT_DESC}</p><span>￥59.90</span></div>
+                    <p>${product.PRODUCT_DESC}</p><span>￥${product.PRODUCT_PRICE}</span></div>
                 <div class="proIntro"><p>颜色分类</p>
                     <div class="smallImg clearfix categ"><p class="fl"><img src="img/temp/prosmall01.jpg"
                                                                             alt="白瓷花瓶+20支快乐花"
@@ -48,13 +48,21 @@
                         <p class="fl"><img src="img/temp/prosmall04.jpg" alt="20支兔尾巴草" data-src="img/temp/proBig04.jpg">
                         </p></div>
                     <p>数量&nbsp;&nbsp;库存<span>${product.PRODUCT_STOCK}</span>件</p>
-                    <div class="num clearfix"><img class="fl sub" src="img/temp/sub.jpg"><span class="fl"
-                                                                                               contentEditable="true">1</span><img
-                            class="fl add" src="img/temp/add.jpg">
+                    <div class="num clearfix">
+                        <img class="fl sub" src="img/temp/sub.jpg">
+                        <span id="count" class="fl" contentEditable="true">1</span>
+                        <img class="fl add" src="img/temp/add.jpg">
                         <p class="please fl">请选择商品属性!</p></div>
                 </div>
-                <div class="btns clearfix"><a href="#2"><p class="buy fl">立即购买</p></a><a href="#2"><p class="cart fr">
-                    加入购物车</p></a></div>
+                <div class="btns clearfix">
+                    <a href="javascript:shopCartAdd(${product.PRODUCT_ID}, 1)"><p class="buy fl">立即购买</p></a>
+                    <a href="javascript:shopCartAdd(${product.PRODUCT_ID}, 0)"><p class="cart fr">加入购物车</p></a></div>
+                <script>
+                    function shopCartAdd(id, buy) {
+                        let count = document.getElementById("count").innerHTML;
+                        location.href = "cartAdd?productId=" + id + "&buy=" + buy + "&count=" + count;
+                    }
+                </script>
             </div>
         </div>
     </div>
@@ -207,7 +215,7 @@
         </div>
     </div>
 </div><!--返回顶部-->
-<div class="gotop"><a href="cart.html">
+<div class="gotop"><a href="cartAdd?buy=2">
     <dl class="goCart">
         <dt><img src="img/gt1.png"/></dt>
         <dd>去购<br/>物车</dd>

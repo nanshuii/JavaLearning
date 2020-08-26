@@ -6,6 +6,11 @@ $(function () {
         } else {
             c--;
             $(this).siblings("span").text(c);
+            let cartId = $(this).siblings("span").attr("data-src");
+            let price = $(this).parents("div").siblings("div[id=price_num]").text();
+            $.get("cartUpdate?type=numberUpdate&quality=" + c + "&cartId=" + cartId + "&price=" + price, function () {
+
+            });
             var d = $(this).parents(".number").prev().text().substring(1);
             $(this).parents(".th").find(".sAll").text("￥" + (c * d).toFixed(2));
             a();
@@ -14,11 +19,18 @@ $(function () {
     });
     $(".num .add").click(function () {
         var c = parseInt($(this).siblings("span").text());
-        if (c >= 5) {
-            confirm("限购5件")
+        if (c >= 20) {
+            confirm("限购20件")
         } else {
             c++;
             $(this).siblings("span").text(c);
+
+            let cartId = $(this).siblings("span").attr("data-src");
+            let price = $(this).parents("div").siblings("div[id=price_num]").text();
+            $.get("cartUpdate?type=numberUpdate&quality=" + c + "&cartId=" + cartId + "&price=" + price, function () {
+
+            });
+
             var d = $(this).parents(".number").prev().text().substring(1);
             $(this).parents(".th").find(".sAll").text("￥" + (c * d).toFixed(2));
             a();
