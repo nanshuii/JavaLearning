@@ -33,32 +33,6 @@ public class CartDao {
     }
 
     /**
-     * 通过UserId获取CART
-     * @param userId userId
-     * @return CART
-     */
-    public static CART cartGetByUserId(int userId) {
-        CART cart = null;
-        String sql = "select * from CART where CART_USER_ID = ? and CART_PRO_VAILD = 1";
-        Connection connection = BaseDao.getConnection();
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, userId);
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                cart = cartGetWithResultSet(resultSet);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            BaseDao.closeAll(resultSet, preparedStatement, connection);
-        }
-        return cart;
-    }
-
-    /**
      * 通过userId和productId来获取CART
      * @param userId userId
      * @param productId productId
@@ -106,6 +80,37 @@ public class CartDao {
                 CART cart = cartGetWithResultSet(resultSet);
                 if (cart != null) {
                     carts.add(cart);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            BaseDao.closeAll(resultSet, preparedStatement, connection);
+        }
+        return carts;
+    }
+
+    /**
+     * 通过cartId数组获取购物车列表内容
+     * @param cartIds
+     * @return ArrayList<CART>
+     */
+    public static ArrayList<CART> cartSelectByCartIds(String[] cartIds) {
+        ArrayList<CART> carts = new ArrayList<CART>();
+        Connection connection = BaseDao.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String sql = "select * from CART where CART_ID = ?";
+        try {
+            for (String cartId: cartIds) {
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1, Integer.parseInt(cartId));
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    CART cart = cartGetWithResultSet(resultSet);
+                    if (cart != null) {
+                        carts.add(cart);
+                    }
                 }
             }
         } catch (SQLException e) {

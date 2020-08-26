@@ -14,25 +14,22 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-@WebServlet(urlPatterns = "/cartSelect")
-public class cartSelect extends HttpServlet {
+@WebServlet(urlPatterns = "/orderSelect")
+public class orderSelect extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String ids = req.getParameter("ids");
+        String[] idsArr = ids.split(",");
         HttpSession session = req.getSession();
         Integer isLogin = (Integer) session.getAttribute("isLogin");
         System.out.println("isLogin = " + isLogin);
         // 判断是否登录
         if (isLogin != null && isLogin == 1) {
             USER user = (USER)session.getAttribute("login_user");
-            // 获取改用户的全部购物车信息
-            ArrayList<CART> carts = CartDao.cartSelect(Integer.parseInt(user.getUSER_ID()));
-            float orderTotal = 0;
-            for (CART cart: carts) {
-                float total = cart.getCART_PRO_TOTAL();
-                orderTotal += total;
-            }
+            // 获取购物车信息
+            ArrayList<CART> carts = CartDao.cartSelectByCartIds(idsArr);
             req.setAttribute("cart_list", carts);
-            req.getRequestDispatcher("cart.jsp").forward(req, resp);
+            req.getRequestDispatcher("order.jsp").forward(req, resp);
         } else {
             toLogin(req, resp);
         }
