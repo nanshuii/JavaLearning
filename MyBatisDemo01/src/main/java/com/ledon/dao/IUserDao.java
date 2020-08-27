@@ -1,6 +1,7 @@
 package com.ledon.dao;
 
 import com.ledon.domain.USER;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -13,5 +14,6 @@ public interface IUserDao {
      * 查询所有USER
      * @return List<USER>
      */
+    @Select("select * from USER")
     List<USER> findAll();
 }
