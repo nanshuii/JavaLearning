@@ -1,0 +1,28 @@
+package com.ledon.mybatis.sqlsession;
+
+import com.ledon.mybatis.cfg.Configuration;
+
+/**
+ * SqlSessionFactory接口实现类
+ */
+public class DefaultSqlSessionFactory implements SqlSessionFactory{
+
+//    public SqlSession openSession() {
+//        return null;
+//    }
+
+    private Configuration cfg;
+
+    public DefaultSqlSessionFactory(Configuration cfg) {
+        this.cfg = cfg;
+    }
+
+    /**
+     * 用于创建一个新的操作数据库对象
+     * @return
+     */
+    @Override
+    public SqlSession openSession() {
+        return new DefaultSqlSession(cfg);
+    }
+}
