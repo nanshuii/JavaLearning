@@ -27,8 +27,10 @@ public class DefaultSqlSession implements SqlSession{
      */
     @Override
     public <T> T getMapper(Class<T> daoInterfaceClass) {
-        return (T) Proxy.newProxyInstance(daoInterfaceClass.getClassLoader(),
-                new Class[]{daoInterfaceClass},new MapperProxy(cfg.getMappers(),connection));
+        return (T) Proxy.newProxyInstance(
+                daoInterfaceClass.getClassLoader(),
+                new Class[]{daoInterfaceClass},
+                new MapperProxy(cfg.getMappers(),connection));
     }
 
     /**

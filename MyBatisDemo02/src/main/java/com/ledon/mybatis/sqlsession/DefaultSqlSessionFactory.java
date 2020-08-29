@@ -7,10 +7,6 @@ import com.ledon.mybatis.cfg.Configuration;
  */
 public class DefaultSqlSessionFactory implements SqlSessionFactory{
 
-//    public SqlSession openSession() {
-//        return null;
-//    }
-
     private Configuration cfg;
 
     public DefaultSqlSessionFactory(Configuration cfg) {
