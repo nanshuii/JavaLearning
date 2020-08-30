@@ -1,5 +1,6 @@
 package com.ledon.dao;
 
+import com.ledon.domain.QueryVo;
 import com.ledon.domain.USER;
 import org.apache.ibatis.annotations.Select;
 
@@ -53,4 +54,11 @@ public interface IUserDao {
      * @return
      */
     int total();
+
+    /**
+     * 通过queryVo中的条件查询用户
+     * @param vo
+     * @return List<USER>
+     */
+    List<USER> findUserByVo(QueryVo vo);
 }

@@ -36,4 +36,8 @@
     <select id="total" resultType="int">
         select count(id) from USER
     </select>
+
+    <select id="findUserByVo" parameterType="com.ledon.domain.QueryVo" resultType="com.ledon.domain.USER">
+        select * from USER where username like #{user.username}
+    </select>
 </mapper>

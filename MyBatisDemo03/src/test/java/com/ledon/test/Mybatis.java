@@ -1,6 +1,7 @@
 package com.ledon.test;
 
 import com.ledon.dao.IUserDao;
+import com.ledon.domain.QueryVo;
 import com.ledon.domain.USER;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -98,5 +99,17 @@ public class Mybatis {
     public void testTotal() throws IOException{
         int total = iUserDao.total();
         System.out.println(total);
+    }
+
+    @Test
+    public void testQueryVo() throws IOException{
+        QueryVo vo = new QueryVo();
+        USER user = new USER();
+        user.setUsername("%王%");
+        vo.setUser(user);
+        List<USER> users = iUserDao.findUserByVo(vo);
+        for (USER u : users) {
+            System.out.println(u);
+        }
     }
 }
