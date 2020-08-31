@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- mybatis主配置文件 -->
+<configuration>
+    <!-- 配置properties
+         可以在标签内部配置连接数据库的信息，也可以引用外部信息
+         resource属性：
+            用于指定配置文件的位置，在类路径之下
+         url属性：Uniform Resource Locator
+            要求按照url的写法来写地址
+            写法：协议 主机 端口 URI
+            最下面的mapper也需要用url
+            -->
+
+<!--    <properties>-->
+<!--        <property name="driver" value="com.mysql.cj.jdbc.Driver" />-->
+<!--        <property name="url" value="jdbc:mysql://localhost:3306/MyBatisDemo" />-->
+<!--        <property name="username" value="root" />-->
+<!--        <property name="password" value="12345678" />-->
+<!--    </properties>-->
+
+    <properties resource="jdbcConfig.properties"></properties>
+
+    <!-- 使用typeAliases配置别名，只能配置domain中类的别名 -->
+    <typeAliases>
+        <!-- type属性指定实体类全限定类名，alias属性指定别名；当指定了别名就不再区分大小写 -->
+<!--        <typeAlias type="com.ledon.domain.USER" alias="user"></typeAlias>-->
+
+        <!-- 用于指定配置别名的包，当指定之后，该包下的实体类都会注册别名，类名就是别名，不再区分大小写 -->
+        <package name="com.ledon.domain"/>
+    </typeAliases>
+
+    <!-- 配置环境 -->
+    <environments default="mysql">
+        <!-- 配置mysql环境 -->
+        <environment id="mysql">
+            <!-- 配置事务的类型 -->
+            <transactionManager type="JDBC"></transactionManager>
+            <!-- 配置数据源（连接池）-->
+            <dataSource type="POOLED">
+                <!-- 配置连接数据库的4个基本信息 -->
+                <property name="driver" value="${driver}" />
+                <property name="url" value="${url}" />
+                <property name="username" value="${username}" />
+                <property name="password" value="${password}" />
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 指定映射配置文件的位置，映射配置文件指的是每个dao独立的配置文件
+         如果是用注解来配置的话，使用class属性指定被注解的dao全限定类名 -->
+    <mappers>
+<!--        <mapper resource="com/ledon/dao/IUserDao.xml"/>-->
+<!--        <mapper class="com.ledon.dao.IUserDao" />-->
+        <!-- 用于指定dao接口所在的包，指定完成之后不需要再写mapper以及resource以及class -->
+        <package name="com.ledon.dao"/>
+    </mappers>
+</configuration>

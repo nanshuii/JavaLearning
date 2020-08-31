@@ -9,6 +9,7 @@
         <module name="MyBatisDemo03" />
         <module name="MyBatisDemo02" />
         <module name="MyBatisDemo01" />
+        <module name="MyBatisDemo04" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="9" />
