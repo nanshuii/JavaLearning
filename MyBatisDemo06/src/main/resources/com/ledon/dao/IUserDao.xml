@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0// EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ledon.dao.IUserDao">
+
+    <!-- 定义USER的resultMap -->
+    <resultMap id="userAccountMap" type="user">
+        <id property="id" column="id"></id>
+        <result property="username" column="username"></result>
+        <result property="address" column="address"></result>
+        <result property="sex" column="sex"></result>
+        <result property="birthday" column="birthday"></result>
+        <!-- 配置对象中accounts集合的映射 -->
+        <collection property="accounts" ofType="account">
+            <id property="id" column="aid"></id>
+            <result property="uid" column="uid"></result>
+            <result property="money" column="money"></result>
+        </collection>
+    </resultMap>
+
+    <resultMap id="userRoleMap" type="user">
+        <id property="id" column="id"></id>
+        <result property="username" column="username"></result>
+        <result property="address" column="address"></result>
+        <result property="sex" column="sex"></result>
+        <result property="birthday" column="birthday"></result>
+        <!-- 配置对象中roles集合的映射 -->
+        <collection property="roles" ofType="role">
+            <id property="roleId" column="rid"></id>
+            <result property="roleName" column="role_name"></result>
+            <result property="roleDesc" column="role_desc"></result>
+        </collection>
+    </resultMap>
+
+    <!-- 配置查询所有 -->
+    <select id="findAll" resultMap="userAccountMap">
+    	select u.*, a.id as aid, a.uid, a.money from USER u left outer join account a on u.id = a.uid
+    </select>
+
+    <select id="findUsersRoles" resultMap="userRoleMap">
+        select u.*, r.id as rid, r.role_name, r.role_desc from user u left outer join user_role ur on u.id = ur.uid left outer join role r on r.id = ur.rid
+    </select>
+
+    <select id="findById" parameterType="java.lang.Integer" resultType="user">
+        select * from USER where id=#{id}
+    </select>
+
+    <!--    select * from USER where username like #{username} 这种方式更好-->
+    <select id="findLikeName" parameterType="java.lang.String" resultType="user">
+        select * from USER where username like '%${value}%'
+    </select>
+
+    <select id="total" resultType="int">
+        select count(id) from USER
+    </select>
+
+    <select id="findUserByVo" parameterType="com.ledon.domain.QueryVo" resultType="user">
+        select * from USER where username like #{user.username}
+    </select>
+
+<!--    <select id="findUserByCondition" parameterType="user" resultType="user">-->
+<!--        select * from USER where 1=1-->
+<!--        <if test="username != null">-->
+<!--            and username = #{username}-->
+<!--        </if>-->
+<!--        <if test="sex != null">-->
+<!--            and sex = #{sex}-->
+<!--        </if>-->
+<!--    </select>-->
+
+    <select id="findUserByCondition" parameterType="user" resultType="user">
+        select * from USER
+        <where>
+            <if test="username != null">
+                and username = #{username}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex}
+            </if>
+        </where>
+    </select>
+
+    <sql id="defaultUser">
+        select * from USER
+    </sql>
+
+    <select id="findUserInIds" parameterType="queryVo" resultType="user">
+        <include refid="defaultUser"></include>
+        <where>
+            <if test="ids != null and ids.size() > 0">
+                <foreach collection="ids" open="and id in (" close=")" item="id" separator=",">
+                    #{id}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+
+    <insert id="saveUser" parameterType="user">
+        <!-- 配置插入操作后，获取插入数据的id -->
+        <selectKey keyProperty="id" keyColumn="id" resultType="int" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into USER (username, address, sex, birthday) values (#{username}, #{address}, #{sex}, #{birthday})
+    </insert>
+
+    <update id="updateUser" parameterType="user">
+        update USER set username=#{username}, address=#{address}, sex=#{sex}, birthday=#{birthday} where id=#{id}
+    </update>
+    
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from USER where id=#{id}
+    </delete>
+
+
+</mapper>
