@@ -5,6 +5,9 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/../MyBatisDemo07/pom.xml" />
+        <option value="$PROJECT_DIR$/../MyBatisDemo08/pom.xml" />
+        <option value="$PROJECT_DIR$/../MyBatisDemo09/pom.xml" />
+        <option value="$PROJECT_DIR$/../MyBatisDemo10/pom.xml" />
       </list>
     </option>
   </component>
