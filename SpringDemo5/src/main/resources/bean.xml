@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 配置IOC -->
+    <bean id="accountService" class="com.ledon.service.impl.AccountService"></bean>
+
+    <!-- 配置AOP -->
+
+    <!-- 配置通知bean Logger-->
+    <bean id="logger" class="com.ledon.utils.Logger"></bean>
+
+    <!-- aop:config开始配置AOP -->
+    <aop:config>
+        <!-- aop:aspect开始配置切面
+                id 提供唯一标识
+                ref 通知类bean的id-->
+        <aop:aspect id="loggerAdvice" ref="logger">
+            <!-- 对应的标签 配置通知的类型
+                    aop:before 表示前置通知
+                        method 指定哪个方法是前置通知
+                        pointcut 指定切入点表达式；对业务层中哪些方法增强
+                            execution
+                            表达式：访问修饰符 返回值 包名.包名.类名.方法名(参数列表)
+                            单个方法的表达式 execution(public void com.ledon.service.impl.AccountService.saveAccount())
+                            统配表达式 * *..*.*(..)
+                                访问修饰符可以省略
+                                * 表示任意返回值
+                                有几级包写几个*.
+                                包名也可以写..表示当前包及其子包
+                                类名和方法名可以使用*
+                                参数可以写..-->
+            <aop:before method="beforePrintLog" pointcut-ref="pt1"></aop:before>
+            <aop:after-returning method="afterReturnPrintLog" pointcut-ref="pt1"></aop:after-returning>
+            <aop:after-throwing method="afterThrowPrintLog" pointcut-ref="pt1"></aop:after-throwing>
+            <aop:after method="afterPrintLog" pointcut-ref="pt1"></aop:after>
+            <aop:around method="aroundPrintLog" pointcut-ref="pt1"></aop:around>
+            <!-- 切入点表达式 -->
+            <aop:pointcut id="pt1" expression="execution(* *..*.*(..))"/>
+        </aop:aspect>
+
+
+    </aop:config>
+
+</beans>
+
+
+
+
+
+
+
