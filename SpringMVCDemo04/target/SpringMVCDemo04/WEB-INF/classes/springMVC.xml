@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 开启注解的扫描 -->
+    <context:component-scan base-package="com.ledon"></context:component-scan>
+
+    <!-- 视图解析器 -->
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 视图文件所在目录
+                /WEB-INF/pages/ 代表pages下所有文件-->
+        <property name="prefix" value="/WEB-INF/pages/"></property>
+        <!-- 文件后缀名 -->
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!-- 前端控制器 哪些静态资源不拦截 -->
+    <mvc:resources mapping="/js/**" location="/js/"></mvc:resources>
+    <mvc:resources mapping="/images/**" location="/images/"></mvc:resources>
+    <mvc:resources mapping="/css/**" location="/css/"></mvc:resources>
+
+    <!-- 拦截器配置 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 要拦截的具体方法
+                   /user/* user下所有方法
+                   /** 所有方法-->
+            <mvc:mapping path="/user/*"/>
+            <!-- 不要拦截的具体方法 -->
+<!--            <mvc:exclude-mapping path=""/>-->
+            <bean id="interceptor1" class="com.ledon.interceptor.interceptor1"></bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <!-- 要拦截的具体方法
+                   /user/* user下所有方法
+                   /** 所有方法-->
+            <mvc:mapping path="/user/*"/>
+            <bean id="interceptor2" class="com.ledon.interceptor.interceptor2"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!-- 开启SpringMVC框架注解的支持 -->
+    <mvc:annotation-driven></mvc:annotation-driven>
+
+</beans>
